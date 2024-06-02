@@ -3,23 +3,28 @@
 @tailwind utilities;
 
 @layer components {
-	
-	
+    .summary {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+    }
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+    }
+}
 
-	.summary {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 4;
-	}
-	.visually-hidden {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0;
-		border: 0;
-		clip: rect(0 0 0 0);
-		overflow: hidden;
-	  }
-	
+/* Modificación de colores del logo*/
+.blue-xpress {
+    color: #26838f;
+}
+
+.purple-xpress {
+    color: #707cbd;
 }
