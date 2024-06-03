@@ -8,7 +8,7 @@ const Footer = () => {
 		<IoCarOutline size={24} />
 
 	    </svg>
-        <h2 className="text-2xl font-bold">ViajeExpress Ltd.</h2>
+        <h2 className="text-2xl font-bold">ViajeXpress Ltd.</h2>
         <p className="font-semibold">seguro </p>
     </div>
     <div className="flex justify-center space-x-6">
