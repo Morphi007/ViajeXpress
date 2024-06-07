@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import { IoCarOutline } from 'react-icons/io5'
 
@@ -36,6 +37,10 @@ const Navbar = () => {
             <li>
               <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contacto</a>
             </li>
+            <div className="w-px h-6 bg-gray-300 mx-3"></div>
+            <Link href={'/auth/login'} className="block py-2 px-3 text-gray-900  border border-blue-700 rounded-lg hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent " >
+              Iniciar seccion
+            </Link>
           </ul>
         </div>
       </div>
