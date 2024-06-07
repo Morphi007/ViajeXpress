@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AboutUs: React.FC = () => {
+export const SegundaPagina = () => {
   return (
-    <section className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white py-12 px-4">
+    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white py-12 px-4">
       <div className="max-w-screen-xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8 animate-fadeInUp">Sobre Nosotros</h2>
         <p className="mb-8 text-lg animate-fadeInUp delay-100">
@@ -41,8 +41,8 @@ const AboutUs: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default AboutUs;
+
