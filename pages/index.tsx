@@ -5,7 +5,7 @@ export default function Home() {
 	return (
 		<ExpressLayout title={'ViajeXpress'}>
 			<div>
-				<AboutUs /> {}
+				<AboutUs /> 
 			</div>
 		</ExpressLayout>
 	);
