@@ -145,7 +145,7 @@ const LoginPage = () => {
 								type="submit"
 								className="w-full block bg-[#14A647]  hover:bg-[#0A732F] px-4 py-3 mt-6 rounded-lg font-semibold text-white focus:bg-blue-400 focus:outline-none"
 							>
-								Iniciar seccion
+								Iniciar sesión
 							</button>
 							<div className="text-center">
 								<p className="mt-8 text-gray-500">
