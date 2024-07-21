@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { FC } from 'react';
 import Footer from '../ui/Footer';
 import Navbar from '../ui/Navbar';
+import NavbarExpress from '../ui/Navbar';
 
 type Props = {
 	children: React.ReactNode;
@@ -22,7 +23,7 @@ export const ExpressLayout: FC<Props> = ({ children, title, imageFullUrl }) => {
 				<link rel="icon" href="/favicon.ico" />
 				{imageFullUrl && <meta name="og:image" content={imageFullUrl} />}
 			</Head>
-			<Navbar/>
+			<NavbarExpress/>
 			<main className="flex-grow">
 				{children}
 			</main>
