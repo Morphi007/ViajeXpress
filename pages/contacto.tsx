@@ -5,6 +5,7 @@ const Contacto = () => {
   return (
     <ExpressLayout title="Contacto">
       <h1>Contacto</h1>
+     
     </ExpressLayout>
   );
 };
