@@ -48,3 +48,57 @@
 .purple-xpress {
     color: #742ea3;
 }
+
+/* styles/globals.css */
+.metroContainer {
+	padding: 20px;
+	max-width: 800px;
+	margin: 0 auto;
+	font-family: Arial, sans-serif;
+  }
+  
+  .metroTitle {
+	font-size: 2rem;
+	color: #333;
+	margin-bottom: 20px;
+  }
+  
+  .metroSection {
+	margin-bottom: 30px;
+  }
+  
+  .metroLineList {
+	list-style: none;
+	padding: 0;
+  }
+  
+  .metroLineItem {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: #f9f9f9;
+  }
+  
+  .metroLineName {
+	font-size: 1.5rem;
+	color: #0070f3;
+  }
+  
+  .metroLinePrice {
+	font-weight: bold;
+	color: #333;
+  }
+  
+  .metroContactInfo {
+	font-size: 1rem;
+	color: #555;
+  }
+  
+  .metroMap {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #f0f0f0;
+	border-radius: 4px;
+  }
+  
