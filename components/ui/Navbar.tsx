@@ -12,9 +12,10 @@ const NavbarExpress = () => {
   const menuItems = [
     { name: "Inicio", href: "/" },
     { name: "Servicios", href: "/servicios" },
-    { name: "Tickes", href: "/viajes" },
+    { name: "Tickets", href: "/viajes" },
     { name: "About", href: "/about" },
     { name: "Contacto", href: "/contacto" },
+    
   ];
 
   return (

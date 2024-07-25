@@ -103,4 +103,48 @@
 	background-color: #f0f0f0;
 	border-radius: 4px;
   }
+
+.servicesContainer {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  }
+  
+  .servicesTitle {
+	text-align: center;
+	margin-bottom: 20px;
+  }
+  
+  .servicesIntro {
+	text-align: center;
+	font-size: 1.2em;
+	margin-bottom: 30px;
+  }
+  
+  .servicesSection {
+	margin-bottom: 40px;
+  }
+  
+  .servicesSection h2 {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+  }
+  
+  .servicesSection p {
+	font-size: 1em;
+	margin-bottom: 20px;
+  }
+  
+  .servicesImage {
+	text-align: center;
+  }
+  
+  .servicesImage img {
+	border-radius: 8px;
+  }
   
