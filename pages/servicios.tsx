@@ -8,7 +8,7 @@ const Servicios = () => {
     <ExpressLayout title="Contacto">
 
     <div className="servicesContainer">
-      <h1 className="servicesTitle">Servicios de Transporte</h1>
+      <h3 className="servicesTitle">Servicios de Transporte</h3>
       <p className="servicesIntro">
         Bienvenido a nuestra sección de servicios de transporte. Aquí encontrarás toda la información necesaria sobre nuestros viajes en autobuses, líneas del metro, paradas, y mucho más.
       </p>
