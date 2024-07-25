@@ -60,7 +60,7 @@
   }
   
   .metroTitle {
-	font-size: 2rem;
+	font-size: 5rem;
 	color: #333;
 	margin-bottom: 20px;
   }
@@ -109,7 +109,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 50px;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -118,6 +118,7 @@
   .servicesTitle {
 	text-align: center;
 	margin-bottom: 20px;
+	font-size: 2.5rem;
   }
   
   .servicesIntro {
