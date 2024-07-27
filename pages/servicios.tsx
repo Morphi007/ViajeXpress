@@ -29,12 +29,14 @@ const Servicios = () => {
         <h2>Líneas del Metro</h2>
         <p>Consulta las líneas del metro, incluyendo rutas, horarios y precios.</p>
         <a href="https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp" target="_blank" rel="noopener noreferrer">
-          <img
-            src="https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp"
-            alt="Líneas del Metro"
-            style={{ width: '30%', height: 'auto', borderRadius: '8px' }}
-          />
         </a>
+        <div style={{ marginTop: '20px' }}>
+          <Link href="/metroLines">
+            <button style={{ padding: '10px 20px', borderRadius: '8px', background: '#0070f3', color: '#fff', border: 'none', cursor: 'pointer' }}>
+               Más información sobre Líneas del Metro
+             </button>
+          </Link>
+         </div>
       </section>
 
       <section className="servicesSection">
