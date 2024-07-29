@@ -1,4 +1,4 @@
-// pages/TickerPage.tsx
+// pages/TicketsPage.tsx
 import React, { useEffect, useState } from 'react';
 import { ExpressLayout } from "@/components/layout";
 import Cookies from 'js-cookie';
@@ -29,11 +29,11 @@ const TicketCard: React.FC<{ ticket: TicketInfo; onEliminar: (id: string) => voi
   return (
     <div className="bg-white border rounded-lg overflow-hidden shadow-md">
       <div className="relative w-full h-40">
-        <Image 
+        <Image
           fill
-          style={{objectFit: "cover"}}
-          src="https://static.vecteezy.com/system/resources/previews/006/067/026/non_2x/bus-cartoon-illustration-free-vector.jpg" 
-          alt="Bus" 
+          style={{ objectFit: "cover" }}
+          src="https://static.vecteezy.com/system/resources/previews/006/067/026/non_2x/bus-cartoon-illustration-free-vector.jpg"
+          alt="Bus"
         />
       </div>
       <div className="p-4">
@@ -45,13 +45,13 @@ const TicketCard: React.FC<{ ticket: TicketInfo; onEliminar: (id: string) => voi
         <p className="text-sm mb-1"><strong>Pasajeros:</strong> {ticket.pasajeros}</p>
         <p className="text-sm mb-3"><strong>Horario:</strong> {ticket.horarioSeleccionado}</p>
         <div className="flex space-x-2">
-          <button 
+          <button
             className="flex-1 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
             onClick={handleComprar}
           >
             Comprar
           </button>
-          <button 
+          <button
             className="flex-1 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
             onClick={() => onEliminar(ticket.id)}
           >
@@ -63,7 +63,7 @@ const TicketCard: React.FC<{ ticket: TicketInfo; onEliminar: (id: string) => voi
   );
 };
 
-export default function TickerPage() {
+export default function TicketsPage() {
   const [ticketsReservados, setTicketsReservados] = useState<TicketInfo[]>([]);
 
   useEffect(() => {
@@ -94,9 +94,9 @@ export default function TickerPage() {
         <h1 className="text-2xl font-bold mb-6 text-center">Mis Tickets Reservados ({ticketsReservados.length})</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {ticketsReservados.map((ticket) => (
-            <TicketCard 
-              key={ticket.id} 
-              ticket={ticket} 
+            <TicketCard
+              key={ticket.id}
+              ticket={ticket}
               onEliminar={handleEliminar}
               onComprar={handleComprar}
             />

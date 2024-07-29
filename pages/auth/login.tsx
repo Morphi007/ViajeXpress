@@ -61,14 +61,13 @@ const LoginPage = () => {
 				<div className=" md:flex md:w-1/3 bg-white h-screen items-center justify-center w-full px-6 lg:px-16 xl:px-12">
 					<div className="w-full h-100">
 						<h2 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center text-gray-700">
-						<a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-      
-          <span className="self-center text-2xl font-bold">
-            <span className="blue-xpress">Viaje</span>
-            <span className="purple-xpress">X</span>
-            <span className="blue-xpress">press</span>
-          </span>
-        </a>
+							<a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+								<span className="self-center text-2xl font-bold">
+									<span className="blue-xpress">Viaje</span>
+									<span className="purple-xpress">X</span>
+									<span className="blue-xpress">press</span>
+								</span>
+							</a>
 						</h2>
 
 						<form onSubmit={handleSubmit(onLoginUser)} noValidate className="mt-6">
