@@ -214,6 +214,8 @@ const MetroLines = () => {
           <div className={styles.metroMap}>
             <Image src={metroMap} alt="Mapa del Metro de Santo Domingo" />
           </div>
+
+          <button className={styles.metroButton}>Comprar tickets</button>
         </div>
       </div>
     </ExpressLayout>
