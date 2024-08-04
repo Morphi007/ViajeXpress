@@ -82,12 +82,12 @@ const Viajes = () => {
 
   return (
     <ExpressLayout title="Comprar tickets de autobuses">
-      <div className="container mx-auto p-4">
-        <h1 className='text-center text-3xl font-bold text-blue-950'>Comprar tickets de autobuses</h1>
+      <div className="container mx-auto p-4 lg:p-8">
+        <h1 className='text-center text-4xl font-bold text-blue-950 mb-8'>Comprar tickets de autobuses</h1>
         <SearchForm onSearch={handleSearch} />
         
-        <div className="mt-8 flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/3 m-3">
+        <div className="mt-8 flex flex-col lg:flex-row gap-8">
+          <div className="w-full lg:w-1/3 bg-white shadow-lg rounded-lg p-6">
             {selectedRoute ? (
               <RutaCard route={selectedRoute} />
             ) : (
@@ -95,11 +95,10 @@ const Viajes = () => {
             )}
           </div>
         
-          <div className="w-full z-0 lg:w-2/3 lg:pr-4 mb-4 lg:mb-0">
+          <div className="w-full lg:w-2/3 relative">
             {leafletLoaded && (
-              <div className="map-container" style={{ position: 'relative' }}>
+              <div className="map-container bg-white shadow-lg rounded-lg overflow-hidden">
                 <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: '400px', width: '100%' }}>
-                 <div className="bottom-line" style={{ position: 'absolute', bottom: 0, width: '100%', height: '2px', background: 'gray' }}></div>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
