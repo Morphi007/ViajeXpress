@@ -14,7 +14,9 @@ const NavbarExpress = () => {
     { name: "Servicios", href: "/servicios" },
     { name: "Comprar Tickes", href: "/viajes" },
     { name: "About", href: "/about" },
+    { name: "Nosotros", href: "/about" },
     { name: "Contacto", href: "/contacto" },
+
   ];
 
   return (
@@ -26,8 +28,8 @@ const NavbarExpress = () => {
       maxWidth="full"
     >
       <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle 
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"} 
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="text-white"
         />
       </NavbarContent>
@@ -46,9 +48,9 @@ const NavbarExpress = () => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={`${item.name}-${index}`}>
-            <Link 
+            <Link
               as={NextLink}
-              color="foreground" 
+              color="foreground"
               href={item.href}
               className="w-full text-white hover:text-purple-500 font-semibold"
             >
@@ -60,16 +62,16 @@ const NavbarExpress = () => {
 
       <NavbarContent justify="end">
         <NavbarItem className="hidden sm:flex">
-          <Button 
-            as={NextLink} 
-            href="/auth/login" 
-            variant="flat" 
+          <Button
+            as={NextLink}
+            href="/auth/login"
+            variant="flat"
             className="text-white border border-white hover:bg-purple-500 hover:text-white"
           >
             Iniciar sesión
           </Button>
         </NavbarItem>
-        <Link href="/ticker" className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 focus:bg-gray-100 active:bg-gray-200">
+        <Link href="/tickets" className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 focus:bg-gray-100 active:bg-gray-200">
           <IoTicketOutline size={25} className="text-black" />
           {ticketCount > 0 && (
             <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">

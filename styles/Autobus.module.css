@@ -1,0 +1,59 @@
+.autobusContainer {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .autobusTitle {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .autobusIntro {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .autobusContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .autobus {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .autobusImage {
+    width: 350px; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: 350px; /* Mantiene la proporción de la imagen */
+
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .trayecto {
+    margin-top: 10px;
+  }
+  
+  .autobus h2,
+  .autobus h3 {
+    margin: 0;
+  }
+  
+  .autobus ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .autobus li {
+    padding: 5px 0;
+  }
+  
