@@ -32,8 +32,9 @@
   }
   
   .autobusImage {
-    width: 100px;
-    height: 100px;
+    width: 350px; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: 350px; /* Mantiene la proporción de la imagen */
+
     object-fit: cover;
     border-radius: 8px;
   }
