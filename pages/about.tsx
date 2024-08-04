@@ -1,12 +1,11 @@
 import React from 'react';
 import { ExpressLayout } from '@/components/layout';
+import { SegundaPagina } from '@/components/principal';
 
 const About = () => {
   return (
     <ExpressLayout title="About">
-      <h1>About</h1>
-
-      
+      <SegundaPagina />
     </ExpressLayout>
   );
 };

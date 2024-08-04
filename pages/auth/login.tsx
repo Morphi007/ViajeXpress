@@ -1,12 +1,19 @@
 import React, { useContext, useState } from 'react';
 import AuthLayout from '@/components/layout/AuthLayout';
 import Link from 'next/link';
+<<<<<<< HEAD
 import Sidepic from '@/public/assets/login.png';
 import Image from 'next/image';
 import { signIn, getSession, getProviders } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { validation } from '@/utils';
 //import Preloader from '@/components/preloader/Preloader';
+=======
+import Image from 'next/image';
+import { signIn, getSession } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { validation } from '@/utils';
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 import { GetServerSideProps } from 'next';
 import { AuthContext } from '@/context/auth';
 
@@ -16,7 +23,10 @@ type FormData = {
 };
 
 const LoginPage = () => {
+<<<<<<< HEAD
 	//const [user, setUser] = useState({Email: '',Password: '',});
+=======
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 	const { loginUser } = useContext(AuthContext);
 
 	const {
@@ -25,7 +35,11 @@ const LoginPage = () => {
 		formState: { errors },
 	} = useForm<FormData>();
 
+<<<<<<< HEAD
 	const [errorMessage, setErrorMessage] = useState(''); // State for error message
+=======
+	const [errorMessage, setErrorMessage] = useState('');
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 	const [showError, setShowError] = useState(false);
 	const [failedAttempts, setFailedAttempts] = useState(0);
 
@@ -64,6 +78,7 @@ const LoginPage = () => {
 				<div className=" md:flex md:w-1/3 bg-white h-screen items-center justify-center w-full px-6 lg:px-16 xl:px-12">
 					<div className="w-full h-100">
 						<h2 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center text-gray-700">
+<<<<<<< HEAD
 						<a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
       
           <span className="self-center text-2xl font-bold">
@@ -72,6 +87,15 @@ const LoginPage = () => {
             <span className="blue-xpress">press</span>
           </span>
         </a>
+=======
+							<a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+								<span className="self-center text-2xl font-bold">
+									<span className="blue-xpress">Viaje</span>
+									<span className="purple-xpress">X</span>
+									<span className="blue-xpress">press</span>
+								</span>
+							</a>
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 						</h2>
 
 						<form onSubmit={handleSubmit(onLoginUser)} noValidate className="mt-6">
@@ -79,17 +103,28 @@ const LoginPage = () => {
 								<label
 									htmlFor="email"
 									className="block text-black font-semibold"
+<<<<<<< HEAD
 									style={{ color: '#14532d' }}
 								>
 									Correo Electrónico
+=======
+									style={{ color: '#1e3a8a' }} // Cambiado a azul
+								>
+									Correo electrónico
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 								</label>
 								<div className="text-red-500">{errorMessage}</div>
 								<div className="text-red-500">{showError}</div>
 								<input
 									type="email"
 									id="email"
+<<<<<<< HEAD
 									placeholder="Ingresa Correo Electrónico"
 									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border border-gray-300 focus:border-[#14A647] focus:outline-none focus:ring-[#14A647]"
+=======
+									placeholder="Ingresa Correo electrónico"
+									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border border-gray-300 focus:border-[#1e3a8a] focus:outline-none focus:ring-[#1e3a8a]" // Cambiado a azul
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 									{...register('Email', {
 										required: 'Este campo es requerido',
 										validate: validation.isEmail,
@@ -106,7 +141,11 @@ const LoginPage = () => {
 								<label
 									htmlFor="password"
 									className="block text-black font-semibold"
+<<<<<<< HEAD
 									style={{ color: '#14532d' }}
+=======
+									style={{ color: '#1e3a8a' }} // Cambiado a azul
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 								>
 									Contraseña
 								</label>
@@ -115,7 +154,11 @@ const LoginPage = () => {
 									id="password"
 									minLength={6}
 									placeholder="Ingresa tu contraseña"
+<<<<<<< HEAD
 									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border focus:border-[#14A647] focus:outline-none focus:bg-white"
+=======
+									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border focus:border-[#1e3a8a] focus:outline-none focus:bg-white" // Cambiado a azul
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 									{...register('Password', {
 										required: 'Este campo es requerido',
 										minLength: { value: 6, message: 'Mínimo 6 caracteres' },
@@ -135,7 +178,11 @@ const LoginPage = () => {
 								<Link
 									href="/forgot-password"
 									type="submit"
+<<<<<<< HEAD
 									className="text-sm font-semibold text-gray-500 hover:text-[#14A647] focus:text-blue-700 focus:outline-none"
+=======
+									className="text-sm font-semibold text-gray-500 hover:text-[#1e3a8a] focus:text-[#1e3a8a] focus:outline-none" // Cambiado a azul
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 								>
 									¿Olvidaste la contraseña?
 								</Link>
@@ -143,16 +190,26 @@ const LoginPage = () => {
 
 							<button
 								type="submit"
+<<<<<<< HEAD
 								className="w-full block bg-[#14A647]  hover:bg-[#0A732F] px-4 py-3 mt-6 rounded-lg font-semibold text-white focus:bg-blue-400 focus:outline-none"
 							>
 								Iniciar seccion
+=======
+								className="w-full block bg-[#1e3a8a]  hover:bg-[#1c3d73] px-4 py-3 mt-6 rounded-lg font-semibold text-white focus:bg-[#1c3d73] focus:outline-none" // Cambiado a azul
+							>
+								Iniciar sesión
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 							</button>
 							<div className="text-center">
 								<p className="mt-8 text-gray-500">
 									¿Necesitas una cuenta?
 									<Link
 										href="/auth/register"
+<<<<<<< HEAD
 										className="text-[#14A647] hover:text-[#0A732F] font-semibold"
+=======
+										className="text-[#1e3a8a] hover:text-[#1c3d73] font-semibold" // Cambiado a azul
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 									>
 										{' '}
 										Crear una cuenta
@@ -172,8 +229,11 @@ const LoginPage = () => {
 	);
 };
 
+<<<<<<< HEAD
 //LoginPage.getLayout = (page: React.ReactNode) => null;
 
+=======
+>>>>>>> 0509656d4cfc1ac3c03a625141cd43465efedf55
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 	const session = await getSession({ req });
 	console.log({ session });
