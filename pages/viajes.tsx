@@ -6,6 +6,7 @@ import { Icon } from 'leaflet';
 import SearchForm from '@/components/viaje/SearchForm';
 import { Rutas } from '@/database/rutas';
 import RutaCard from '@/components/viaje/RutaCard';
+import TravelAds from '@/components/viaje/TravelAds';
 
 const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
@@ -78,43 +79,58 @@ const Viajes = () => {
     const totalPrice = pricePerPassenger * (1 + tax);
     return totalPrice.toFixed(2);
   };
+
   return (
-    <ExpressLayout title="Viajes">
+    <ExpressLayout title="Comprar tickets de autobuses">
       <div className="container mx-auto p-4">
+        <h1 className='text-center text-3xl font-bold text-blue-950'>Comprar tickets de autobuses</h1>
         <SearchForm onSearch={handleSearch} />
         
         <div className="mt-8 flex flex-col lg:flex-row">
           <div className="w-full lg:w-1/3 m-3">
-            {selectedRoute && <RutaCard route={selectedRoute} />}
+            {selectedRoute ? (
+              <RutaCard route={selectedRoute} />
+            ) : (
+              <p className="text-center text-gray-500">No hay viajes reservados.</p>
+            )}
           </div>
         
-          <div className="w-full z-0 lg:w-2/3 pr-0 lg:pr-4 mb-4  lg:mb-0 ">
-            {leafletLoaded && selectedRoute && (
-              <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: '400px', width: '100%' }}>
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker 
-                  position={[selectedRoute.origin.location.latitude, selectedRoute.origin.location.longitude]} 
-                  icon={customIcon}
-                >
-                  <Popup>{selectedRoute.origin.nombre}</Popup>
-                </Marker>
-                <Marker 
-                  position={[selectedRoute.destination.location.latitude, selectedRoute.destination.location.longitude]} 
-                  icon={customIcon}
-                >
-                  <Popup>{selectedRoute.destination.nombre}</Popup>
-                </Marker>
-                <Polyline positions={[
-                  [selectedRoute.origin.location.latitude, selectedRoute.origin.location.longitude],
-                  [selectedRoute.destination.location.latitude, selectedRoute.destination.location.longitude]
-                ]} />
-              </MapContainer>
+          <div className="w-full z-0 lg:w-2/3 lg:pr-4 mb-4 lg:mb-0">
+            {leafletLoaded && (
+              <div className="map-container" style={{ position: 'relative' }}>
+                <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: '400px', width: '100%' }}>
+                 <div className="bottom-line" style={{ position: 'absolute', bottom: 0, width: '100%', height: '2px', background: 'gray' }}></div>
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  {selectedRoute && (
+                    <>
+                      <Marker 
+                        position={[selectedRoute.origin.location.latitude, selectedRoute.origin.location.longitude]} 
+                        icon={customIcon}
+                      >
+                        <Popup>{selectedRoute.origin.nombre}</Popup>
+                      </Marker>
+                      <Marker 
+                        position={[selectedRoute.destination.location.latitude, selectedRoute.destination.location.longitude]} 
+                        icon={customIcon}
+                      >
+                        <Popup>{selectedRoute.destination.nombre}</Popup>
+                      </Marker>
+                      <Polyline positions={[
+                        [selectedRoute.origin.location.latitude, selectedRoute.origin.location.longitude],
+                        [selectedRoute.destination.location.latitude, selectedRoute.destination.location.longitude]
+                      ]} />
+                    </>
+                  )}
+                </MapContainer>
+              </div>
             )}
           </div>
         </div>
+        
+        <TravelAds />
       </div>
     </ExpressLayout>
   );
