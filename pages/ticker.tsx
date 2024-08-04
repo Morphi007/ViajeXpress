@@ -28,6 +28,7 @@ const TicketCard: React.FC<{ ticket: TicketInfo; onEliminar: (id: string) => voi
 
   return (
     <div className="bg-white border rounded-lg overflow-hidden shadow-md">
+     
       <div className="relative w-full h-40">
         <Image 
           fill
