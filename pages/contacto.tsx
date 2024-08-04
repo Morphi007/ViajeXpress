@@ -8,7 +8,7 @@ const Contactos = () => {
         <div className="max-w-screen-xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8 animate-fadeInUp">Contacto</h2>
           <p className="mb-8 text-xl animate-fadeInUp text-justify delay-100">
-            Si tienes alguna pregunta o necesitas más información sobre nuestros servicios, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte.
+          ¿Tienes alguna pregunta o necesitas más información sobre nuestros servicios? No dudes en ponerte en contacto con nosotros. ¡Estamos aquí para ayudarte!
           </p>
         </div>
 
@@ -23,6 +23,7 @@ const Contactos = () => {
                   type="text"
                   className="w-full p-3 border border-gray-300 rounded-lg"
                   placeholder="Tu nombre"
+                  required
                 />
               </div>
               <div className="mb-4">
@@ -32,6 +33,7 @@ const Contactos = () => {
                   type="email"
                   className="w-full p-3 border border-gray-300 rounded-lg"
                   placeholder="Tu correo electrónico"
+                  required
                 />
               </div>
               <div className="mb-4">
@@ -41,7 +43,7 @@ const Contactos = () => {
                   rows="4"
                   className="w-full p-3 border border-gray-300 rounded-lg"
                   placeholder="Tu mensaje"
-                ></textarea>
+                />
               </div>
               <button
                 type="submit"

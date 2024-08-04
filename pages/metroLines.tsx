@@ -11,84 +11,84 @@ const MetroLines = () => {
         <tr>
           <th>Línea</th>
           <th>Estaciones</th>
-          <th>Tiempo Promedio</th>
+          
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
           <td>Centro de los Héroes</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Francisco Alberto Caamaño</td>
-          <td>6</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Amin Abel</td>
-          <td>7</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Joaquin Balaguer</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Casandra Damiron</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Prof. Juan Borsch</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Juan Pablo Duarte</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Manuel Arturo Peña Batlle</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Pedro Livio Cedeño</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Los tainos</td>
-          <td>6</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Maximo Gomez</td>
-          <td>7</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Juan Francisco Peña Gomez</td>
-          <td>3</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Gregorio Luperon</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Gregorio Urbano Gilbert</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>1</td>
           <td>Mama Tingo</td>
-          <td>3</td>
+          
         </tr>
       </tbody>
     </table>
@@ -100,97 +100,142 @@ const MetroLines = () => {
         <tr>
           <th>Línea</th>
           <th>Estaciones</th>
-          <th>Tiempo Promedio</th>
+        
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>2</td>
           <td>Concepcion bona</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Trina de Moya de Vásquez</td>
-          <td>6</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Ercilia Pepín</td>
-          <td>7</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Eduardo Brito</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Manuel de Jesús Abreu Galvan</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Horacio Vásquez</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Ramón Cáceres</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Mauricio Baez</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Coronel Rafael Tomas Fernández</td>
-          <td>4</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Juan Pablo Duarte</td>
-          <td>6</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Juan Ulises García</td>
-          <td>7</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Freddy Beras Goico</td>
-          <td>3</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Pedro Mir</td>
-          <td>5</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Ulises F. Espaillat</td>
-          <td>4</td>
+         
         </tr>
         <tr>
           <td>2</td>
           <td>Francisco Gregorio Billini</td>
-          <td>3</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>Pedro Francisco Bono</td>
-          <td>3</td>
+          
         </tr>
         <tr>
           <td>2</td>
           <td>María Montez</td>
-          <td>3</td>
+          
         </tr>
       </tbody>
     </table>
+  );
+
+  const tableContent3 = (
+    <table>
+  <thead>
+    <tr>
+      <th>Línea</th>
+      <th>Estaciones</th>
+      <th>Tiempo Promedio En minutos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Mamá Tingó - Centro de los Héroes</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Juan Pablo Duarte - Mamá Tingó</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Juan Pablo Duarte - Centro de los Héroes</td>
+      <td>09</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>María Montez - Concepción Bona</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Juan Pablo Duarte - María Montez</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Juan Pablo Duarte - Concepción Bona</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+
   );
 
   return (
@@ -208,6 +253,9 @@ const MetroLines = () => {
             </div>
             <div className={styles.metroTable}>
               {tableContent2}
+            </div>
+            <div className={styles.metroTable}>
+              {tableContent3}
             </div>
           </div>
           

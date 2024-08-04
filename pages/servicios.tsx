@@ -27,8 +27,8 @@ const Servicios = () => {
             <p className="mt-4 text-white text-xl">
               Explora nuestras rutas de autobuses con información sobre horarios y destinos.
             </p>
-            
-            <Link href="/metroLines">
+            <br />
+            <Link href="/bus">
             
               <button className="px-6 py-3 rounded-lg bg-white text-blue-600 border-none cursor-pointer">
                 Más información sobre los viajes en Autobuses
