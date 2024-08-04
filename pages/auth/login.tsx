@@ -26,6 +26,9 @@ const LoginPage = () => {
 	} = useForm<FormData>();
 
 	const [errorMessage, setErrorMessage] = useState(''); // State for error message
+	const [showError, setShowError] = useState(false);
+	const [failedAttempts, setFailedAttempts] = useState(0);
+
 	const onLoginUser = async ({ Email, Password }: FormData) => {
 		setShowError(false);
 		const isValidLogin = await loginUser(Email, Password);
