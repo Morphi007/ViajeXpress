@@ -131,4 +131,95 @@
   .animate-slideUp {
 	animation: slideUp 1s ease-out;
   }
+  .autobusContainer {
+	background-color: #fff;
+	color: #333;
+	padding-top: 3rem;
+	padding-bottom: 1rem;
+  }
+  
+  .autobusTitle {
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin-bottom: 2rem;
+	animation: fadeInUp 1s ease-out;
+  }
+  
+  .autobusIntro {
+	text-align: center;
+	font-size: 1.25rem;
+	margin-bottom: 2rem;
+	animation: fadeInUp 1s ease-out;
+	text-align: justify;
+  }
+  
+  .autobusContent {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2rem;
+  }
+  
+  .autobus {
+	background-color: #f4f4f4;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 300px;
+	text-align: center;
+	padding: 1.5rem;
+	transition: background-color 0.3s ease;
+	animation: fadeInUp 1s ease-out;
+  }
+  
+  .autobus:hover {
+	background-color: #e0e0e0;
+  }
+  
+  .autobusImage {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 1rem;
+	max-width: 100%;
+	height: auto;
+  }
+  
+  .autobus h2 {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+  }
+  
+  .trayecto {
+	margin-top: 1rem;
+  }
+  
+  .trayecto h3 {
+	font-size: 1.25rem;
+	color: #444;
+  }
+  
+  .trayecto p {
+	font-size: 1rem;
+	color: #777;
+  }
+  
+  .trayecto ul {
+	list-style: none;
+	padding: 0;
+  }
+  
+  .trayecto li {
+	font-size: 1rem;
+	color: #555;
+  }
+  
+  @keyframes fadeInUp {
+	from {
+	  opacity: 0;
+	  transform: translateY(20px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
   
