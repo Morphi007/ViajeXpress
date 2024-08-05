@@ -84,7 +84,7 @@ const RegisterPage = ({}) => {
         <div className="absolute inset-0 flex flex-col justify-center items-center z-10">
           <div className="w-full max-w-fit p-3 bg-white shadow-md rounded-lg overflow-hidden">
             <div className="p-4">
-              <h2 className="text-2xl font-semibold mb-4 text-center text-[#16a34a] ">
+              <h2 className="text-2xl font-semibold mb-4 text-center text-blue-600 ">
                 Registrarse
               </h2>
               <form onSubmit={handleSubmit(onRegisterForm)} noValidate>
