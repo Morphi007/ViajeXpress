@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Button } from "@nextui-org/react";
+import React, { useState, useEffect } from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import { IoCarOutline, IoTicketOutline } from 'react-icons/io5';
 import NextLink from 'next/link';
 import { useTicket } from "@/context/auth/TicketContext";
@@ -33,7 +33,7 @@ const NavbarExpress = () => {
     setIsDropdownHovered(false);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = (event: Event) => {
     const target = event.target as HTMLElement;
     if (!target.closest('.dropdown-container')) {
       setIsDropdownOpen(false);
@@ -41,10 +41,10 @@ const NavbarExpress = () => {
     }
   };
 
-  React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside as EventListener);
     };
   }, []);
 
@@ -83,16 +83,18 @@ const NavbarExpress = () => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
-                  className={`text-white font-semibold px-4 py-2 flex items-center justify-between transition-colors ${
-                    isDropdownOpen || isDropdownHovered ? 'bg-purple-500' : 'hover:bg-purple-500'
-                  }`}
-                >
-                  {item.name}
-                  <span className={`ml-1 inline-block w-3 h-3 border-t-2 border-white border-solid border-r-2 border-transparent rotate-45 ${
-                    isDropdownOpen ? 'border-white' : 'border-transparent'
-                  }`}></span>
-                </button>
+                <NextLink href={item.href} legacyBehavior>
+                  <a
+                    className={`text-white font-semibold px-4 py-2 flex items-center justify-between transition-colors ${
+                      isDropdownOpen || isDropdownHovered ? 'bg-purple-500' : 'hover:bg-purple-500'
+                    }`}
+                  >
+                    {item.name}
+                    <span className={`ml-1 inline-block w-3 h-3 border-t-2 border-white border-solid border-r-2 border-transparent rotate-45 ${
+                      isDropdownOpen ? 'border-white' : 'border-transparent'
+                    }`}></span>
+                  </a>
+                </NextLink>
                 <div
                   className={`absolute left-0 mt-2 bg-white text-black shadow-lg rounded-lg transition-transform ${
                     isDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px]'
@@ -145,18 +147,20 @@ const NavbarExpress = () => {
           <NavbarMenuItem key={`${item.name}-${index}`}>
             {item.name === "Servicios" ? (
               <div className="relative">
-                <button
-                  className={`text-white font-semibold px-4 py-2 flex items-center justify-between transition-colors ${
-                    isDropdownOpen ? 'bg-purple-500' : 'hover:bg-purple-500'
-                  }`}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  {item.name}
-                  <span className={`ml-1 inline-block w-3 h-3 border-t-2 border-white border-solid border-r-2 border-transparent rotate-45 ${
-                    isDropdownOpen ? 'border-white' : 'border-transparent'
-                  }`}></span>
-                </button>
+                <NextLink href={item.href} legacyBehavior>
+                  <a
+                    className={`text-white font-semibold px-4 py-2 flex items-center justify-between transition-colors ${
+                      isDropdownOpen ? 'bg-purple-500' : 'hover:bg-purple-500'
+                    }`}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {item.name}
+                    <span className={`ml-1 inline-block w-3 h-3 border-t-2 border-white border-solid border-r-2 border-transparent rotate-45 ${
+                      isDropdownOpen ? 'border-white' : 'border-transparent'
+                    }`}></span>
+                  </a>
+                </NextLink>
                 <div
                   className={`absolute left-0 mt-2 bg-white text-black shadow-lg rounded-lg transition-transform ${
                     isDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-10px]'

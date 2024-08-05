@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from "react";
+import Modal from "react-modal";
 import { ExpressLayout } from '@/components/layout';
 import Link from 'next/link';
 
+
+Modal.setAppElement('#__next'); // Important for accessibility
+
 const Servicios = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalImageSrc, setModalImageSrc] = useState("");
+
+  const openModal = (src: React.SetStateAction<string>) => {
+    setModalImageSrc(src);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <ExpressLayout title="Servicios">
       <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white pt-12 pb-1">
@@ -16,13 +32,12 @@ const Servicios = () => {
         <section className="bg-blue-900 py-12 text-center">
           <h3 className="text-3xl font-semibold mb-8 text-white animate-fadeInUp delay-200">Viajes Disponibles en Autobuses</h3>
           <div className="animate-fadeInUp delay-300 max-w-screen-xl mx-auto flex flex-col items-center">
-            <a href="https://www.aeropuertos.net/wp-content/uploads/2016/06/autobus-etn-aeropuerto-guadalajara.jpg" target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://www.aeropuertos.net/wp-content/uploads/2016/06/autobus-etn-aeropuerto-guadalajara.jpg"
-                alt="Viajes en Autobuses"
-                className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto"
-              />
-            </a>
+            <img
+              src="https://www.aeropuertos.net/wp-content/uploads/2016/06/autobus-etn-aeropuerto-guadalajara.jpg"
+              alt="Viajes en Autobuses"
+              className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto cursor-pointer"
+              onClick={() => openModal("https://www.aeropuertos.net/wp-content/uploads/2016/06/autobus-etn-aeropuerto-guadalajara.jpg")}
+            />
             <p className="mt-4 text-white text-xl animate-fadeInUp delay-400">
               Explora nuestras rutas de autobuses con información sobre horarios y destinos.
             </p>
@@ -41,7 +56,8 @@ const Servicios = () => {
             <img
               src="https://th.bing.com/th/id/OIP.ONO6sF4ZGutKlp0ydfDUQQHaFj?rs=1&pid=ImgDetMain"
               alt="Líneas del Metro"
-              className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto"
+              className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto cursor-pointer"
+              onClick={() => openModal("https://th.bing.com/th/id/OIP.ONO6sF4ZGutKlp0ydfDUQQHaFj?rs=1&pid=ImgDetMain")}
             />
             <p className="text-black text-xl mb-4 animate-fadeInUp delay-400">
               Consulta las líneas del metro, incluyendo rutas, horarios y precios.
@@ -57,19 +73,55 @@ const Servicios = () => {
         <section className="bg-blue-900 py-12 text-center">
           <h3 className="text-3xl font-semibold mb-8 text-white animate-fadeInUp delay-200">Información de Paradas</h3>
           <div className="animate-fadeInUp delay-300 max-w-screen-xl mx-auto flex flex-col items-center">
-            <a href="https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp" target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp"
-                alt="Información de Paradas"
-                className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto"
-              />
-            </a>
+            <img
+              src="https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp"
+              alt="Información de Paradas"
+              className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto cursor-pointer"
+              onClick={() => openModal("https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp")}
+            />
             <p className="mt-4 text-white text-xl animate-fadeInUp delay-400">
               Encuentra información sobre las paradas de autobuses y estaciones de metro cercanas.
             </p>
           </div>
         </section>
       </div>
+
+      {/* Modal */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Imagen Modal"
+        className="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >
+        <div className="relative max-w-3xl mx-auto bg-white p-4 rounded-lg">
+        <button
+          onClick={closeModal}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-900"
+          aria-label="Cerrar modal">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 18L18 6M6 6l12 12"
+            />
+        </svg>
+</button>
+
+          <img
+            src={modalImageSrc}
+            alt="Imagen Modal"
+            className="w-full h-auto"
+          />
+        </div>
+      </Modal>
     </ExpressLayout>
   );
 };
