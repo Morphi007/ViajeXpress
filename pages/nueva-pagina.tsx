@@ -3,7 +3,7 @@ import { ExpressLayout } from '@/components/layout';
 import { useRouter } from 'next/router';
 
 const NuevaPagina = () => {
-  const [cardNumber, setCardNumber] = useState('');
+  const [metroCardNumber, setMetroCardNumber] = useState('');
   const [amount, setAmount] = useState('');
   const [currentBalance, setCurrentBalance] = useState(0);
   const [message, setMessage] = useState('');
@@ -17,9 +17,9 @@ const NuevaPagina = () => {
   const router = useRouter();
 
   const handleRecharge = () => {
-    if (cardNumber && amount && paymentMethod) {
+    if (metroCardNumber && amount && paymentMethod && cardDetails.cardNumber && cardDetails.expiryDate && cardDetails.cvv) {
       setCurrentBalance(currentBalance + parseFloat(amount));
-      setMessage(`Tarjeta ${cardNumber} recargada con ${amount} unidades usando ${paymentMethod}.`);
+      setMessage(`Tarjeta del metro ${metroCardNumber} recargada con ${amount} pesos dominicanos`);
     } else {
       setMessage('Por favor, completa todos los campos.');
     }
@@ -51,20 +51,20 @@ const NuevaPagina = () => {
             Recargar Tarjeta del Metro
           </h1>
           <p className="text-xl text-center mb-8 text-gray-700 dark:text-gray-300 animate-fadeInUp">
-            Introduce el número de tu tarjeta y el monto que deseas recargar.
+            Introduce el número de tu tarjeta del metro y el monto que deseas recargar.
           </p>
           <div className="max-w-md mx-auto bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6">
             <div className="mb-4">
-              <label htmlFor="cardNumber" className="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
-                Número de Tarjeta
+              <label htmlFor="metroCardNumber" className="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
+                Número de Tarjeta del Metro
               </label>
               <input
                 type="text"
-                id="cardNumber"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
+                id="metroCardNumber"
+                value={metroCardNumber}
+                onChange={(e) => setMetroCardNumber(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                placeholder="Número de tarjeta"
+                placeholder="Número de tarjeta del metro"
               />
             </div>
             <div className="mb-4">
@@ -98,8 +98,21 @@ const NuevaPagina = () => {
             {paymentMethod && (
               <div className="mb-4">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Detalles de la Tarjeta
+                  Detalles de la Tarjeta de Pago
                 </h2>
+                <div className="mb-4">
+                  <label htmlFor="cardNumber" className="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
+                    Número de Tarjeta
+                  </label>
+                  <input
+                    type="text"
+                    id="cardNumber"
+                    value={cardDetails.cardNumber}
+                    onChange={handleCardDetailsChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                    placeholder="Número de tarjeta"
+                  />
+                </div>
                 <div className="mb-4">
                   <label htmlFor="expiryDate" className="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
                     Fecha de Expiración
