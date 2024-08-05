@@ -20,8 +20,8 @@ const NavbarExpress = () => {
 
   const dropdownItems = [
     { name: "Viajes", href: "/viajes" },
-    { name: "Bus", href: "/bus" },
-    { name: "Metro", href: "/metroLines" },
+    { name: "Autobuses", href: "/bus" },
+    { name: "Estaciones del metro", href: "/metroLines" },
   ];
 
   const handleMouseEnter = () => {
