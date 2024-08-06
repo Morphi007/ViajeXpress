@@ -31,10 +31,49 @@ const NuevaPagina = () => {
 
   const handleCardDetailsChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
+
+    if (id === 'cardNumber' && value.length > 16) return;
+    if (id === 'expiryDate') {
+      const formattedValue = value.replace(/[^0-9]/g, '');
+      if (formattedValue.length > 4) return;
+      if (formattedValue.length === 3) {
+        setCardDetails((prevDetails) => ({
+          ...prevDetails,
+          [id]: `${formattedValue.slice(0, 2)}/${formattedValue.slice(2)}`
+        }));
+      } else if (formattedValue.length === 4) {
+        setCardDetails((prevDetails) => ({
+          ...prevDetails,
+          [id]: `${formattedValue.slice(0, 2)}/${formattedValue.slice(2)}`
+        }));
+      } else {
+        setCardDetails((prevDetails) => ({
+          ...prevDetails,
+          [id]: formattedValue
+        }));
+      }
+      return;
+    }
+    if (id === 'cvv' && value.length > 3) return;
+
     setCardDetails((prevDetails) => ({
       ...prevDetails,
       [id]: value
     }));
+  };
+
+  const handleMetroCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (/^\d{0,16}$/.test(value)) {
+      setMetroCardNumber(value);
+    }
+  };
+
+  const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (/^\d*\.?\d{0,2}$/.test(value)) {
+      setAmount(value);
+    }
   };
 
   return (
@@ -62,7 +101,7 @@ const NuevaPagina = () => {
                 type="text"
                 id="metroCardNumber"
                 value={metroCardNumber}
-                onChange={(e) => setMetroCardNumber(e.target.value)}
+                onChange={handleMetroCardNumberChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                 placeholder="Número de tarjeta del metro"
               />
@@ -72,10 +111,10 @@ const NuevaPagina = () => {
                 Monto a Recargar
               </label>
               <input
-                type="number"
+                type="text"
                 id="amount"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={handleAmountChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                 placeholder="Monto"
               />
@@ -115,7 +154,7 @@ const NuevaPagina = () => {
                 </div>
                 <div className="mb-4">
                   <label htmlFor="expiryDate" className="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
-                    Fecha de Expiración
+                    Fecha de Expiración (MM/AA)
                   </label>
                   <input
                     type="text"
