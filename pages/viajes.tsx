@@ -80,9 +80,9 @@ const Viajes = () => {
   };
 
   return (
-    <ExpressLayout title="Comprar tickets de autobuses">
+    <ExpressLayout title="Reservar tu viaje ">
       <div className="container mx-auto p-4 lg:p-8">
-        <h1 className='text-center text-4xl font-bold text-blue-950 mb-8'>Comprar tickets de autobuses</h1>
+        <h1 className='text-center text-4xl font-bold text-blue-950 mb-8'>Reservar tu viaje en autobús</h1>
         <div className="relative z-10">
           <SearchForm onSearch={handleSearch} />
         </div>
@@ -92,7 +92,7 @@ const Viajes = () => {
             {selectedRoute ? (
               <RutaCard route={selectedRoute} />
             ) : (
-              <p className="text-center text-gray-500">No hay viajes reservados.</p>
+              <p className="text-center text-gray-500">No hay viajes seleccionados.</p>
             )}
           </div>
         </div>
