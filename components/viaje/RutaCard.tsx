@@ -39,7 +39,6 @@ const RutaCard: React.FC<RutaCardProps> = ({ route }) => {
       fecha: route.date,
       Precio: route.precio,
       pasajeros: route.passengers,
-      horarioSeleccionado: route.origin.horarios[0]
     };
 
     const existingTickets = JSON.parse(Cookies.get('tickets') || '[]');

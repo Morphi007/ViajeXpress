@@ -10,10 +10,7 @@ interface TicketInfo {
   destino: string;
   fecha: string;
   Precio: string;
-  inpuesto: string;
-  Total: string;
   pasajeros: number;
-  horarioSeleccionado: string;
 }
 
 const TicketCard: React.FC<{ ticket: TicketInfo; onEliminar: (id: string) => void; onComprar: (id: string) => void }> = ({ ticket, onEliminar, onComprar }) => {
@@ -41,10 +38,7 @@ const TicketCard: React.FC<{ ticket: TicketInfo; onEliminar: (id: string) => voi
         <h3 className="text-lg font-semibold mb-2">{ticket.origen} - {ticket.destino}</h3>
         <p className="text-sm mb-1"><strong>Fecha:</strong> {ticket.fecha}</p>
         <p className="text-sm mb-1"><strong>Precio:</strong> {ticket.Precio} DOP</p>
-        <p className="text-sm mb-1"><strong>Impuesto:</strong> {ticket.inpuesto}</p>
-        <p className="text-sm mb-1"><strong>Total:</strong> {ticket.Total} DOP</p>
         <p className="text-sm mb-1"><strong>Pasajeros:</strong> {ticket.pasajeros}</p>
-        <p className="text-sm mb-3"><strong>Horario:</strong> {ticket.horarioSeleccionado}</p>
         <div className="flex space-x-2">
           <button
             className="flex-1 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
