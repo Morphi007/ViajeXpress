@@ -15,7 +15,6 @@ interface Route {
   };
   date: string;
   precio: string;
-  total: string;
   passengers: number;
 }
 
@@ -26,7 +25,6 @@ interface RutaCardProps {
 const RutaCard: React.FC<RutaCardProps> = ({ route }) => {
   const { updateTicketCount } = useTicket();
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const formattedPrice = parseFloat(route.total).toFixed(2);
 
   const handleCompra = () => {
     if (route.origin.nombre === route.destination.nombre) {
@@ -40,8 +38,6 @@ const RutaCard: React.FC<RutaCardProps> = ({ route }) => {
       destino: route.destination.nombre,
       fecha: route.date,
       Precio: route.precio,
-      impuesto: "0.15%",
-      Total: formattedPrice,
       pasajeros: route.passengers,
       horarioSeleccionado: route.origin.horarios[0]
     };
@@ -64,8 +60,6 @@ const RutaCard: React.FC<RutaCardProps> = ({ route }) => {
       <h2 className="text-xl font-bold">{route.origin.nombre} - {route.destination.nombre}</h2>
       <p><strong>Fecha:</strong> {route.date}</p>
       <p><strong>Precio:</strong> {route.precio} DOP</p>
-      <p><strong>Impuesto:</strong> (0.15%) </p>
-      <p><strong>Total:</strong> {formattedPrice} DOP</p>
       <p><strong>Personas:</strong> {route.passengers}</p>
       <p><strong>Horarios disponibles:</strong> {route.origin.horarios.join(', ')}</p>
       <div className="flex justify-between items-center mt-4">
