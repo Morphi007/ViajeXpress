@@ -46,15 +46,15 @@ const registerUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => 
 
   await db.connect();
   const user = await User.findOne({ Email }).lean();
-  const cedula = await User.findOne({ Cedula }).lean();
+ // const cedula = await User.findOne({ Cedula }).lean();
 
   if (user) {
     return res.status(404).json({ message: '--Este correo ya esta registrado' });
   }
 
-  if (cedula) {
+  /*if (cedula) {
     return res.status(404).json({ message: '-cedula registrada' });
-  }
+  }*/
 
   const newUser = new User({
     Cedula,

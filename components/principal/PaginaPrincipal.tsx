@@ -18,11 +18,19 @@ export const PaginaPrincipal = () => {
           Tu mejor opción para un transporte seguro y confiable. <br />
           Explora nuestras rutas y servicios.
         </p>
+        
         <a href="/servicios">
           <button className="px-6 py-3 rounded-lg bg-yellow-500 text-blue-900 font-semibold border-none shadow-lg hover:bg-yellow-400 transition duration-300">
             Ver Servicios
           </button>
         </a>
+        <div className="relative z-10 max-w-4xl mx-auto p-4 md:p-8 text-center bg-[rgba(0,0,255,0.6)] text-white mt-8">
+        <h2 className="text-3xl md:text-4xl font-semibold mb-4">Ofertas Especiales</h2>
+        <p className="text-lg mb-4">
+          ¡Aprovecha nuestras ofertas exclusivas en viajes y servicios! Descubre descuentos especiales y promociones para hacer tu experiencia de transporte aún mejor.
+        </p>
+</div>
+
       </div>
     </div>
   );

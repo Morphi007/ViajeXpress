@@ -1,12 +1,10 @@
 import React, { useContext, useState } from 'react';
 import AuthLayout from '@/components/layout/AuthLayout';
 import Link from 'next/link';
-import Sidepic from '@/public/assets/login.png';
 import Image from 'next/image';
-import { signIn, getSession, getProviders } from 'next-auth/react';
+import { signIn, getSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { validation } from '@/utils';
-//import Preloader from '@/components/preloader/Preloader';
 import { GetServerSideProps } from 'next';
 import { AuthContext } from '@/context/auth';
 
@@ -16,7 +14,6 @@ type FormData = {
 };
 
 const LoginPage = () => {
-	//const [user, setUser] = useState({Email: '',Password: '',});
 	const { loginUser } = useContext(AuthContext);
 
 	const {
@@ -25,7 +22,7 @@ const LoginPage = () => {
 		formState: { errors },
 	} = useForm<FormData>();
 
-	const [errorMessage, setErrorMessage] = useState(''); // State for error message
+	const [errorMessage, setErrorMessage] = useState('');
 	const [showError, setShowError] = useState(false);
 	const [failedAttempts, setFailedAttempts] = useState(0);
 
@@ -49,6 +46,14 @@ const LoginPage = () => {
 	return (
 		<AuthLayout title={'login'}>
 			<section className="flex flex-col md:flex-row h-screen items-center">
+			 {/* Botón para volver a la página principal */}
+			 <div className="absolute top-4 left-4">
+          <Link href="/" legacyBehavior>
+            <a className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-700 transition duration-300">
+              Volver a inicio
+            </a>
+          </Link>
+        </div>
 				<div className="h-screen flex justify-center items-center md:w-1/2 xl:w-2/3">
 					<div className="flex justify-center items-center absolute"></div>
 					<Image
@@ -64,14 +69,13 @@ const LoginPage = () => {
 				<div className=" md:flex md:w-1/3 bg-white h-screen items-center justify-center w-full px-6 lg:px-16 xl:px-12">
 					<div className="w-full h-100">
 						<h2 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center text-gray-700">
-						<a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-      
-          <span className="self-center text-2xl font-bold">
-            <span className="blue-xpress">Viaje</span>
-            <span className="purple-xpress">X</span>
-            <span className="blue-xpress">press</span>
-          </span>
-        </a>
+							<a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+								<span className="self-center text-2xl font-bold">
+									<span className="blue-xpress">Viaje</span>
+									<span className="purple-xpress">X</span>
+									<span className="blue-xpress">press</span>
+								</span>
+							</a>
 						</h2>
 
 						<form onSubmit={handleSubmit(onLoginUser)} noValidate className="mt-6">
@@ -79,17 +83,17 @@ const LoginPage = () => {
 								<label
 									htmlFor="email"
 									className="block text-black font-semibold"
-									style={{ color: '#14532d' }}
+									style={{ color: '#1e3a8a' }} // Cambiado a azul
 								>
-									Correo Electrónico
+									Correo electrónico
 								</label>
 								<div className="text-red-500">{errorMessage}</div>
 								<div className="text-red-500">{showError}</div>
 								<input
 									type="email"
 									id="email"
-									placeholder="Ingresa Correo Electrónico"
-									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border border-gray-300 focus:border-[#14A647] focus:outline-none focus:ring-[#14A647]"
+									placeholder="Ingresa Correo electrónico"
+									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border border-gray-300 focus:border-[#1e3a8a] focus:outline-none focus:ring-[#1e3a8a]" // Cambiado a azul
 									{...register('Email', {
 										required: 'Este campo es requerido',
 										validate: validation.isEmail,
@@ -106,7 +110,7 @@ const LoginPage = () => {
 								<label
 									htmlFor="password"
 									className="block text-black font-semibold"
-									style={{ color: '#14532d' }}
+									style={{ color: '#1e3a8a' }} // Cambiado a azul
 								>
 									Contraseña
 								</label>
@@ -115,7 +119,7 @@ const LoginPage = () => {
 									id="password"
 									minLength={6}
 									placeholder="Ingresa tu contraseña"
-									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border focus:border-[#14A647] focus:outline-none focus:bg-white"
+									className="w-full bg-gray-200 text-black rounded-lg px-4 py-3 mt-2 border focus:border-[#1e3a8a] focus:outline-none focus:bg-white" // Cambiado a azul
 									{...register('Password', {
 										required: 'Este campo es requerido',
 										minLength: { value: 6, message: 'Mínimo 6 caracteres' },
@@ -135,7 +139,7 @@ const LoginPage = () => {
 								<Link
 									href="/forgot-password"
 									type="submit"
-									className="text-sm font-semibold text-gray-500 hover:text-[#14A647] focus:text-blue-700 focus:outline-none"
+									className="text-sm font-semibold text-gray-500 hover:text-[#1e3a8a] focus:text-[#1e3a8a] focus:outline-none" // Cambiado a azul
 								>
 									¿Olvidaste la contraseña?
 								</Link>
@@ -143,16 +147,17 @@ const LoginPage = () => {
 
 							<button
 								type="submit"
-								className="w-full block bg-[#14A647]  hover:bg-[#0A732F] px-4 py-3 mt-6 rounded-lg font-semibold text-white focus:bg-blue-400 focus:outline-none"
+								className="w-full block bg-[#1e3a8a]  hover:bg-[#1c3d73] px-4 py-3 mt-6 rounded-lg font-semibold text-white focus:bg-[#1c3d73] focus:outline-none" // Cambiado a azul
 							>
-								Iniciar seccion
+								Iniciar sesión
 							</button>
+							
 							<div className="text-center">
 								<p className="mt-8 text-gray-500">
 									¿Necesitas una cuenta?
 									<Link
 										href="/auth/register"
-										className="text-[#14A647] hover:text-[#0A732F] font-semibold"
+										className="text-[#1e3a8a] hover:text-[#1c3d73] font-semibold" // Cambiado a azul
 									>
 										{' '}
 										Crear una cuenta
@@ -171,8 +176,6 @@ const LoginPage = () => {
 		</AuthLayout>
 	);
 };
-
-//LoginPage.getLayout = (page: React.ReactNode) => null;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 	const session = await getSession({ req });

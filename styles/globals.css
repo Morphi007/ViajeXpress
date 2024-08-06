@@ -51,55 +51,175 @@
     color: #742ea3;
 }
 
-/* styles/globals.css */
-.metroContainer {
-	padding: 20px;
-	max-width: 800px;
-	margin: 0 auto;
-	font-family: Arial, sans-serif;
+
+/* MetroLines.module.css */
+.metroLinesContainer {
+	padding: 2rem;
+	text-align: center;
   }
   
-  .metroTitle {
-	font-size: 5rem;
+  .metroLinesTitle {
+	font-size: 2rem;
+	margin-bottom: 1rem;
 	color: #333;
-	margin-bottom: 20px;
   }
   
-  .metroSection {
-	margin-bottom: 30px;
+  .metroLinesIntro {
+	font-size: 1.25rem;
+	margin-bottom: 2rem;
   }
   
-  .metroLineList {
+  .metroContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  .metroTableContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-bottom: 2rem;
+  }
+  
+  .metroTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 1rem;
+  }
+  
+  .metroTable th, .metroTable td {
+	border: 1px solid #ddd;
+	padding: 0.75rem;
+	text-align: left;
+  }
+  
+  .metroTable th {
+	background-color: #f4f4f4;
+  }
+  
+  .metroMap {
+	margin-bottom: 2rem;
+  }
+  
+  .metroButton {
+	padding: 0.75rem 1.5rem;
+	background-color: #0070f3;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background-color 0.3s ease;
+  }
+  
+  .metroButton:hover {
+	background-color: #005bb5;
+  }
+  
+  @keyframes slideUp {
+	from {
+	  transform: translateY(100%);
+	  opacity: 0;
+	}
+	to {
+	  transform: translateY(0);
+	  opacity: 1;
+	}
+  }
+  
+  .animate-slideUp {
+	animation: slideUp 1s ease-out;
+  }
+  .autobusContainer {
+	background-color: #fff;
+	color: #333;
+	padding-top: 3rem;
+	padding-bottom: 1rem;
+  }
+  
+  .autobusTitle {
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: bold;
+	margin-bottom: 2rem;
+	animation: fadeInUp 1s ease-out;
+  }
+  
+  .autobusIntro {
+	text-align: center;
+	font-size: 1.25rem;
+	margin-bottom: 2rem;
+	animation: fadeInUp 1s ease-out;
+	text-align: justify;
+  }
+  
+  .autobusContent {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2rem;
+  }
+  
+  .autobus {
+	background-color: #f4f4f4;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 300px;
+	text-align: center;
+	padding: 1.5rem;
+	transition: background-color 0.3s ease;
+	animation: fadeInUp 1s ease-out;
+  }
+  
+  .autobus:hover {
+	background-color: #e0e0e0;
+  }
+  
+  .autobusImage {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 1rem;
+	max-width: 100%;
+	height: auto;
+  }
+  
+  .autobus h2 {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+  }
+  
+  .trayecto {
+	margin-top: 1rem;
+  }
+  
+  .trayecto h3 {
+	font-size: 1.25rem;
+	color: #444;
+  }
+  
+  .trayecto p {
+	font-size: 1rem;
+	color: #777;
+  }
+  
+  .trayecto ul {
 	list-style: none;
 	padding: 0;
   }
   
-  .metroLineItem {
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 10px;
-	margin-bottom: 10px;
-	background-color: #f9f9f9;
-  }
-  
-  .metroLineName {
-	font-size: 1.5rem;
-	color: #0070f3;
-  }
-  
-  .metroLinePrice {
-	font-weight: bold;
-	color: #333;
-  }
-  
-  .metroContactInfo {
+  .trayecto li {
 	font-size: 1rem;
 	color: #555;
   }
   
-  .metroMap {
-	margin-top: 20px;
-	padding: 10px;
-	background-color: #f0f0f0;
-	border-radius: 4px;
+  @keyframes fadeInUp {
+	from {
+	  opacity: 0;
+	  transform: translateY(20px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
   }
+  
