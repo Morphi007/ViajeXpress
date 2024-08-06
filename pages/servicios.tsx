@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import { ExpressLayout } from '@/components/layout';
 import Link from 'next/link';
 
-
 Modal.setAppElement('#__next'); // Important for accessibility
 
 const Servicios = () => {
@@ -29,6 +28,7 @@ const Servicios = () => {
           </p>
         </div>
 
+        
         <section className="bg-blue-900 py-12 text-center">
           <h3 className="text-3xl font-semibold mb-8 text-white animate-fadeInUp delay-200">Viajes Disponibles en Autobuses</h3>
           <div className="animate-fadeInUp delay-300 max-w-screen-xl mx-auto flex flex-col items-center">
@@ -71,7 +71,29 @@ const Servicios = () => {
         </section>
 
         <section className="bg-blue-900 py-12 text-center">
-          <h3 className="text-3xl font-semibold mb-8 text-white animate-fadeInUp delay-200">Información de Paradas</h3>
+          <h3 className="text-3xl font-semibold mb-8 text-white animate-fadeInUp delay-200">Reserva tus Viajes</h3>
+         <div className="animate-fadeInUp delay-300 max-w-screen-xl mx-auto flex flex-col items-center">
+            <img
+              src="https://domivia.com.do/wp-content/uploads/2023/07/23424663773_f4538dec7c_b.jpg" // Cambia la URL por una imagen representativa de los viajes
+              alt="Viajes"
+              className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto cursor-pointer"
+              onClick={() => openModal("https://domivia.com.do/wp-content/uploads/2023/07/23424663773_f4538dec7c_b.jpg")}
+            />
+            <p className="mt-4 text-white text-xl animate-fadeInUp delay-400">
+              Descubre todos los destinos y rutas disponibles para tus viajes en autobús.
+            </p>
+            <br />
+            <Link href="/viajes">
+              <button className="px-6 py-3 rounded-lg bg-white text-blue-600 border-none cursor-pointer animate-bounce">
+                Más información sobre nuestros viajes
+              </button>
+            </Link>
+          </div>
+        </section>
+      </div>
+
+<section className="bg-white py-12 text-center">
+          <h3 className="text-3xl font-semibold mb-8 text-blue animate-fadeInUp delay-200">Información de Paradas</h3>
           <div className="animate-fadeInUp delay-300 max-w-screen-xl mx-auto flex flex-col items-center">
             <img
               src="https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp"
@@ -79,12 +101,11 @@ const Servicios = () => {
               className="w-full max-w-sm h-auto rounded-lg shadow-lg mx-auto cursor-pointer"
               onClick={() => openModal("https://appassets.mvtdev.com/map/188/l/5979/22520597/4426479.webp")}
             />
-            <p className="mt-4 text-white text-xl animate-fadeInUp delay-400">
+            <p className="mt-4 text-black text-xl animate-fadeInUp delay-400">
               Encuentra información sobre las paradas de autobuses y estaciones de metro cercanas.
             </p>
           </div>
         </section>
-      </div>
 
       {/* Modal */}
       <Modal
@@ -95,26 +116,25 @@ const Servicios = () => {
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
       >
         <div className="relative max-w-3xl mx-auto bg-white p-4 rounded-lg">
-        <button
-          onClick={closeModal}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-900"
-          aria-label="Cerrar modal">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <button
+            onClick={closeModal}
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-900"
+            aria-label="Cerrar modal">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-            />
-        </svg>
-</button>
-
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
           <img
             src={modalImageSrc}
             alt="Imagen Modal"
