@@ -30,7 +30,23 @@ const Contactos = () => {
       await axios.post('/api/send-email', {
         to: formData.email,
         subject: 'Confirmación de Recepción de Mensaje',
-        text: 'Gracias por contactarnos. Hemos recibido tu mensaje y un representante se pondrá en contacto contigo pronto.',
+        text:  `
+        <div style="font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
+          <h2 style="color: #0056b3;">¡Gracias por contactarnos!</h2>
+          <p style="font-size: 16px; line-height: 1.5;">
+            Hemos recibido tu mensaje y un representante se pondrá en contacto contigo pronto. 
+            Mientras tanto, si tienes alguna pregunta adicional, no dudes en responder a este correo.
+          </p>
+          <p style="font-size: 14px; color: #555;">
+            Saludos cordiales,<br>
+            El equipo de ViajeXpress
+          </p>
+          <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+          <p style="font-size: 12px; color: #aaa;">
+            Este es un correo automático. Por favor, no respondas a este mensaje.
+          </p>
+        </div>
+      `,
       });
       setSent(true);
       setFormData({ nombre: '', email: '', mensaje: '' }); // Limpiar el formulario

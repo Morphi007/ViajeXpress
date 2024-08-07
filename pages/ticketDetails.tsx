@@ -103,6 +103,8 @@ export default function TicketDetails() {
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
+    console.log("Horario seleccionado:", time);
+    
   };
 
   const hasTimePassed = (time: string) => {
@@ -162,17 +164,13 @@ export default function TicketDetails() {
       origen,
       destino,
       fecha,
-      horario: "10:00 AM",
-      passengers: [
-        {
-          Firstname: "Adrian",
-          Lastname: "Gonzalez",
-        },
-      ],
+      horario: selectedTime,
+      passengers: passengers,
       precio: parseFloat(Precio) * pasajeros,
       impuesto: parseFloat(Precio) * pasajeros * 0.0015,
       total: calculateTotal(),
     };
+    
 
     try {
       const response = await fetch("/api/purchases", {
@@ -327,7 +325,7 @@ export default function TicketDetails() {
               <h4 className="font-medium">A pagar</h4>
               <div className="flex justify-between my-1">
                 <span>Pasajero (x{pasajeros}) </span>
-                <span>${parseFloat(Precio) * pasajeros} </span>
+                <span>${parseFloat(Precio)} </span>
               </div>
               <div className="flex justify-between my-1">
                 <span>Sub-total </span>

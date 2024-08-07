@@ -37,6 +37,8 @@ const Viajes = () => {
     passengers: 1
   });
   const [Rutas, setRutas] = useState<Ruta[]>([]);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   useEffect(() => {
     // Fetch rutas from the API
@@ -72,12 +74,17 @@ const Viajes = () => {
   }, []);
 
   const handleSearch = (origin: string, destination: string, date: string, passengers: number) => {
-    
     setSearchParams({ origin, destination, date, passengers });
     
     const originRoute = Rutas.find(r => r.nombre.toLowerCase().includes(origin.toLowerCase()));
     const destRoute = Rutas.find(r => r.nombre.toLowerCase().includes(destination.toLowerCase()));
-    
+
+    if (origin.toLowerCase() === destination.toLowerCase()) {
+      setShowErrorToast(true);
+      setTimeout(() => setShowErrorToast(false), 5000); // Ocultar el toast después de 5 segundos
+      return;
+    }
+
     if (originRoute && destRoute) {
       setSelectedRoute({
         origin: originRoute,
@@ -92,8 +99,9 @@ const Viajes = () => {
       ];
       setMapCenter(midpoint as [number, number]);
       setMapZoom(7);
+      setShowSuccessToast(true);
+      setTimeout(() => setShowSuccessToast(false), 5000); // Ocultar el toast después de 5 segundos
     }
-    
   };
 
   return (
@@ -114,9 +122,9 @@ const Viajes = () => {
           </div>
         </div>
   
-        <div className="mt-12 relative z-0"> {/* Ajusta el margen superior aquí */}
+        <div className="mt-12 relative z-0">
           {leafletLoaded && (
-            <div className="relative bg-blue-500 shadow-lg rounded-lg overflow-hidden z-0"> {/* Asegúrate de que el z-index sea menor aquí */}
+            <div className="relative bg-blue-500 shadow-lg rounded-lg overflow-hidden z-0">
               <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: '400px', width: '100%' }}>
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -147,7 +155,42 @@ const Viajes = () => {
           )}
         </div>
       </div>
+      {showErrorToast && (
+        <div className="fixed top-20 right-4 z-50 flex items-center w-full max-w-xs p-4 text-white bg-red-600 rounded-lg shadow-lg" role="alert">
+          <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-red-800 rounded-lg">
+            <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+            </svg>
+            <span className="sr-only">Warning icon</span>
+          </div>
+          <div className="ml-3 text-sm font-normal">El origen y el destino no pueden ser el mismo.</div>
+          <button type="button" className="ml-auto -mx-1.5 -my-1.5 bg-red-600 text-white hover:text-red-200 rounded-lg focus:ring-2 focus:ring-red-300 p-1.5 hover:bg-red-700 inline-flex items-center justify-center h-8 w-8" onClick={() => setShowErrorToast(false)}>
+            <span className="sr-only">Close</span>
+            <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+          </button>
+        </div>
+      )}
+      {showSuccessToast && (
+        <div id="toast-success" className="fixed top-20 right-4 z-50 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+          <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+            </svg>
+            <span className="sr-only">Check icon</span>
+          </div>
+          <div className="ml-3 text-sm font-normal">Búsqueda exitosa.</div>
+          <button type="button" className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" onClick={() => setShowSuccessToast(false)}>
+            <span className="sr-only">Close</span>
+            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+          </button>
+        </div>
+      )}
     </ExpressLayout>
   );
 }
+
 export default Viajes;

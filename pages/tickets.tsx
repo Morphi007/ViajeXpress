@@ -22,16 +22,19 @@ const TicketCard: React.FC<{
   onComprar: (id: string) => void;
 }> = ({ ticket, onEliminar, onComprar }) => {
   const { data: session } = useSession();
+  const [showWarningToast, setShowWarningToast] = useState(false);
 
   const handleComprar = () => {
     if (!session) {
-      alert("Por favor, inicia sesión para comprar un ticket.");
-      signIn(); // Redirige a la página de inicio de sesión
+      setShowWarningToast(true);
+      setTimeout(() => {
+        signIn();
+      }, 3000);
       return;
     }
 
     if (ticket.origen === ticket.destino) {
-      alert("Error: El origen y el destino no pueden ser el mismo.");
+      setShowWarningToast(true);
     } else {
       onComprar(ticket.id);
     }
@@ -75,6 +78,23 @@ const TicketCard: React.FC<{
           </button>
         </div>
       </div>
+      {showWarningToast && (
+        <div id="toast-warning" className="fixed top-10 right-4 z-50 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+          <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+            </svg>
+            <span className="sr-only">Warning icon</span>
+          </div>
+          <div className="ms-3 text-sm font-normal">Por favor, inicia sesión para comprar un ticket o asegúrate de que el origen y el destino sean diferentes.</div>
+          <button type="button" className="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" onClick={() => setShowWarningToast(false)} aria-label="Close">
+            <span className="sr-only">Close</span>
+            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -105,7 +125,7 @@ export default function TicketsPage() {
     if (ticketReservado) {
       encryptStorage.setItem(
         "reserved",
-      (ticketReservado)
+        ticketReservado
       );
       router.push("/ticketDetails");
     }

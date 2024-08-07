@@ -55,21 +55,17 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
 
   useEffect(() => {
     if (origin.length > 0) {
-      setOriginSuggestions(prevSuggestions =>
-        prevSuggestions.filter(ruta => ruta.nombre.toLowerCase().includes(origin.toLowerCase()))
-      );
+      setShowOriginSuggestions(true);
     } else {
-      setOriginSuggestions([]);
+      setShowOriginSuggestions(false);
     }
   }, [origin]);
 
   useEffect(() => {
     if (destination.length > 0) {
-      setDestinationSuggestions(prevSuggestions =>
-        prevSuggestions.filter(ruta => ruta.nombre.toLowerCase().includes(destination.toLowerCase()))
-      );
+      setShowDestinationSuggestions(true);
     } else {
-      setDestinationSuggestions([]);
+      setShowDestinationSuggestions(false);
     }
   }, [destination]);
 
@@ -113,7 +109,6 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
     setShowDestinationSuggestions(false);
   };
 
-
   return (
     <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 p-4">
       <div className="flex flex-col md:flex-row items-center w-full md:w-auto space-y-4 md:space-y-0 md:space-x-4">
@@ -149,7 +144,7 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
           <FaMapMarkerAlt className="absolute top-1/2 left-3 transform -translate-y-1/2 text-blue-500" />
           {showOriginSuggestions && originSuggestions.length > 0 && (
             <SugerenciaList 
-              suggestions={originSuggestions} 
+              suggestions={originSuggestions.filter(ruta => ruta.nombre.toLowerCase().includes(origin.toLowerCase()))} 
               onSelect={handleOriginSelect} 
             />
           )}
@@ -193,7 +188,7 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
           <FaMapMarkerAlt className="absolute top-1/2 left-3 transform -translate-y-1/2 text-blue-500" />
           {showDestinationSuggestions && destinationSuggestions.length > 0 && (
             <SugerenciaList 
-              suggestions={destinationSuggestions} 
+              suggestions={destinationSuggestions.filter(ruta => ruta.nombre.toLowerCase().includes(destination.toLowerCase()))} 
               onSelect={handleDestinationSelect} 
             />
           )}

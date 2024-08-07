@@ -70,12 +70,6 @@ const TripBoardingPass: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center p-4 bg-gradient-to-b from-[#1e3a8a] to-[#4590f2]">
-        <button
-          onClick={printPage}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Imprimir
-        </button>
       </div>
     </div>
     </ExpressLayout>
