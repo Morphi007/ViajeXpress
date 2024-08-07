@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import RegisterPage from '@/components/Auth/register';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 type FormData = {
   email: string;
@@ -217,6 +220,21 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
 
+  if (session) {
+    return {
+      redirect: {
+        destination: '/', // Cambia a la ruta deseada después de iniciar sesión
+        permanent: false,
+      },
+    };
+  }
 
+  return {
+    props: {},
+  };
+};
+
+export default RegisterPage;
