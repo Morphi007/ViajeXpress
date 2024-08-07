@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export const TicketCard = ({ ticket, onEliminar }) => {
+export const TicketCard = ({ ticket, onEliminar }: { ticket: any, onEliminar: any }) => {
     return (
       <div className="bg-white border rounded-lg overflow-hidden shadow-md">
         <div className="relative w-full h-40">

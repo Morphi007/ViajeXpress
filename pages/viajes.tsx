@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ExpressLayout } from '@/components/layout';
 import dynamic from 'next/dynamic';
 import 'leaflet/dist/leaflet.css';
-import { Icon } from 'leaflet';
 import SearchForm from '@/components/viaje/SearchForm';
-import { Rutas } from '@/database/rutas';
 import RutaCard from '@/components/viaje/RutaCard';
 
 const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
@@ -14,6 +12,18 @@ const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ss
 const Polyline = dynamic(() => import('react-leaflet').then(mod => mod.Polyline), { ssr: false });
 
 let customIcon: any = null;
+
+interface Ruta {
+  nombre: string;
+  parada: string;
+  mapa: string;
+  precio: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  horarios: string[];
+}
 
 const Viajes = () => {
   const [selectedRoute, setSelectedRoute] = useState<any>(null);
@@ -26,6 +36,22 @@ const Viajes = () => {
     date: '',
     passengers: 1
   });
+  const [Rutas, setRutas] = useState<Ruta[]>([]);
+
+  useEffect(() => {
+    // Fetch rutas from the API
+    const fetchRutas = async () => {
+      try {
+        const response = await fetch("/api/rutas");
+        const data = await response.json();
+        setRutas(data);
+      } catch (error) {
+        console.error("Error fetching rutas:", error);
+      }
+    };
+
+    fetchRutas();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -46,22 +72,20 @@ const Viajes = () => {
   }, []);
 
   const handleSearch = (origin: string, destination: string, date: string, passengers: number) => {
+    
     setSearchParams({ origin, destination, date, passengers });
     
     const originRoute = Rutas.find(r => r.nombre.toLowerCase().includes(origin.toLowerCase()));
     const destRoute = Rutas.find(r => r.nombre.toLowerCase().includes(destination.toLowerCase()));
     
     if (originRoute && destRoute) {
-      const priceDetails = calculatePrice(originRoute.precio, destRoute.precio, passengers);
       setSelectedRoute({
         origin: originRoute,
         precio: originRoute.precio,
         destination: destRoute,
         date: date,
         passengers: passengers,
-        total: calculatePrice(originRoute.precio, destRoute.precio, passengers)
       });
-      
       const midpoint = [
         (originRoute.location.latitude + destRoute.location.latitude) / 2,
         (originRoute.location.longitude + destRoute.location.longitude) / 2
@@ -69,14 +93,7 @@ const Viajes = () => {
       setMapCenter(midpoint as [number, number]);
       setMapZoom(7);
     }
-  };
-
-  const calculatePrice = (originPrice: string, destPrice: string, passengers: number) => {
-    const basePrice = (parseFloat(originPrice) + parseFloat(destPrice)) / 2;
-    const pricePerPassenger = basePrice * passengers;
-    const tax = process.env.NEXT_PUBLIC_TAX_RATE ? parseFloat(process.env.NEXT_PUBLIC_TAX_RATE) : 0.08;
-    const totalPrice = pricePerPassenger * (1 + tax);
-    return totalPrice.toFixed(2);
+    
   };
 
   return (

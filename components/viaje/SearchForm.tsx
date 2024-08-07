@@ -100,9 +100,6 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
   };
 
   const handleSearch = () => {
-    console.log('Buscando:', origin, destination, dates.toString(), passengers);
-    
-    if (!origin || !destination) return;
     onSearch(origin, destination, dates.toString(), passengers);
   };
 

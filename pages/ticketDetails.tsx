@@ -10,7 +10,6 @@ import { CircularProgress } from "@mui/material";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import clientPromise from "@/lib/mongodb";
 
 interface Ruta {
   nombre: string;
