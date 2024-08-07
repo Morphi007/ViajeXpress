@@ -21,7 +21,7 @@ export const SegundaPagina = () => {
             allowFullScreen
             style={{ pointerEvents: 'none' }}  // Deshabilita la interacción
           ></iframe>
-          <div className="text-center text-justify mt-10">
+          <div className="text-center text-justify mt-16">
             <p className="mt-2 text-white text-3xl">
               Proporcionar un servicio de transporte seguro, confiable y eficiente para todos nuestros clientes.
             </p>
@@ -40,7 +40,7 @@ export const SegundaPagina = () => {
             allowFullScreen
             style={{ pointerEvents: 'none' }}  // Deshabilita la interacción
           ></iframe>
-          <div className="text-center text-justify">
+          <div className="text-center text-justify mt-16">
             <p className="mt-2 text-black text-3xl">
               Nuestra misión es brindar un servicio de transporte seguro, confiable y eficiente que supere las expectativas de nuestros clientes.
             </p>
@@ -59,7 +59,7 @@ export const SegundaPagina = () => {
             allowFullScreen
             style={{ pointerEvents: 'none' }}  // Deshabilita la interacción
           ></iframe>
-          <div className="text-center text-justify">
+          <div className="text-center text-justify mt-16">
             <p className="mt-2 text-white text-3xl">
               En ViajeXpress, valoramos el compromiso con nuestros clientes, la responsabilidad en cada uno de nuestros servicios y la excelencia en todas nuestras operaciones.
             </p>
@@ -78,8 +78,8 @@ export const SegundaPagina = () => {
             allowFullScreen
             style={{ pointerEvents: 'none' }}  // Deshabilita la interacción
           ></iframe>
-          <div className="text-center text-justify mt-14">
-            <p className="mt-2 text-2xl">
+          <div className="text-center text-justify mt-24">
+            <p className="mt-2 text-3xl">
               Un equipo de profesionales dedicados a proporcionar el mejor servicio de transporte.
             </p>
           </div>
