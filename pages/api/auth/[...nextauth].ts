@@ -20,7 +20,7 @@ export const authOptions = {
 	  
 		  // Busca el usuario en la base de datos
 		  const user = await db.collection('Users').findOne({ Email: email });
-		  console.log(user);
+
 		  
 	  
 		  // Verifica la contraseña

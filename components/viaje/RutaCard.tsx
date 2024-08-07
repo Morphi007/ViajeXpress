@@ -46,9 +46,6 @@ const RutaCard: React.FC<RutaCardProps> = ({ route }) => {
 
     Cookies.set('tickets', JSON.stringify(updatedTickets), { expires: 7 });
 
-    console.log('Ticket reservado:', routeInfo);
-    console.log('Total de tickets reservados:', updatedTickets.length);
-
     updateTicketCount();
     setShowConfirmation(true);
     setTimeout(() => setShowConfirmation(false), 5000); // Ocultar el mensaje después de 5 segundos

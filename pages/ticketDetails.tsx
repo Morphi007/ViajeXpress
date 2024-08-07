@@ -35,7 +35,6 @@ interface TicketInfo {
 export default function TicketDetails() {
   const { id, origen, destino, Precio, fecha, pasajeros } =
     encryptStorage.getItem("reserved") || {};
-    
   const [ticketsReservados, setTicketsReservados] = useState<TicketInfo[]>([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -49,11 +48,13 @@ export default function TicketDetails() {
 
   const name = session?.user?.name;
   const [UfirstName, UlastName] = name?.split(" ") || ["", ""];
-  
-  const [passengers, setPassengers] = useState<{ Firstname: string; Lastname: string }[]>(
+
+  const [passengers, setPassengers] = useState<
+    { Firstname: string; Lastname: string }[]
+  >(
     Array.from({ length: pasajeros }, (_, i) => ({
       Firstname: i === 0 ? UfirstName || "" : "",
-      Lastname: i === 0 ? UlastName || "" : ""
+      Lastname: i === 0 ? UlastName || "" : "",
     }))
   );
 
@@ -138,7 +139,7 @@ export default function TicketDetails() {
     for (const passenger of passengers) {
       if (!passenger.Firstname || !passenger.Lastname) {
         alert("Por favor ingrese los nombres de todos los pasajeros");
-        return
+        return;
       }
     }
 
@@ -147,8 +148,6 @@ export default function TicketDetails() {
       return;
     }
 
-    console.log(passengers);
-    
     openModal();
   };
 
@@ -157,40 +156,53 @@ export default function TicketDetails() {
     setLoading(true); // Muestra el indicador de carga
     setSuccess(false); // Asegúrate de ocultar el mensaje de éxito
 
-    try {
-      const response = await fetch('/api/purchases', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+    const ticketComprado = {
+      idUser: session?.user?.email,
+      idTrip: id,
+      origen,
+      destino,
+      fecha,
+      horario: "10:00 AM",
+      passengers: [
+        {
+          Firstname: "Adrian",
+          Lastname: "Gonzalez",
         },
-        body: JSON.stringify({
-          idUser: session?.user?.email,
-          idTrip: id,
-          origen,
-          destino,
-          fecha,
-          horario: selectedTime,
-          passengers,
-          precio: parseFloat(Precio) * pasajeros,
-          impuesto: parseFloat(Precio) * pasajeros * 0.0015,
-          total: calculateTotal()
-        })
+      ],
+      precio: parseFloat(Precio) * pasajeros,
+      impuesto: parseFloat(Precio) * pasajeros * 0.0015,
+      total: calculateTotal(),
+    };
+
+    try {
+      const response = await fetch("/api/purchases", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ticketComprado),
       });
 
       if (!response.ok) {
-        throw new Error('Error en la solicitud de compra');
+        throw new Error("Error en la solicitud de compra");
       }
 
       const result = await response.json();
-      console.log('Compra realizada:', result);
+      console.log("Compra realizada:", result);
 
-      setLoading(false);
-      setSuccess(true); // Muestra el mensaje de éxito
+      encryptStorage.setItem("ticketComprado", ticketComprado);
+
+      setTimeout(() => {
+        setLoading(false);
+        setSuccess(true); // Muestra el mensaje de éxito
+      }, 2000);
 
       // Actualizar el estado de la aplicación
       encryptStorage.removeItem("reserved");
 
-      const updatedTickets = ticketsReservados.filter(ticket => ticket.id !== id);
+      const updatedTickets = ticketsReservados.filter(
+        (ticket) => ticket.id !== id
+      );
 
       setTicketsReservados(updatedTickets);
       Cookies.set("tickets", JSON.stringify(updatedTickets));
@@ -199,9 +211,9 @@ export default function TicketDetails() {
         router.push("/ticketComprado");
       }, 3000); // Oculta el mensaje de éxito después de 3 segundos
     } catch (error) {
-      console.error('Error en la compra:', error);
+      console.error("Error en la compra:", error);
       setLoading(false);
-      alert('Error en la compra. Por favor, inténtelo de nuevo.');
+      alert("Error en la compra. Por favor, inténtelo de nuevo.");
     }
   };
 
@@ -239,41 +251,44 @@ export default function TicketDetails() {
           </p>
 
           <form className="mt-6">
-          {passengers.map((passenger, index) => (
-        <div key={index} className="grid gap-x-4 gap-y-3 mb-6 md:grid-cols-2">
-          <div>
-            <label
-              htmlFor={`first_name_${index}`}
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Pasajero {index + 1}
-            </label>
-            <Input
-              type="text"
-              value={passenger.Firstname}
-              onChange={(e) =>
-                handlePassengerChange(index, "Firstname", e.target.value)
-              }
-              id={`first_name_${index}`}
-              placeholder="Nombre"
-              required
-            />
-          </div>
-          <div>
-            <Input
-              type="text"
-              value={passenger.Lastname}
-              onChange={(e) =>
-                handlePassengerChange(index, "Lastname", e.target.value)
-              }
-              id={`last_name_${index}`}
-              styles="md:mt-7 sm:mt-0"
-              placeholder="Apellido"
-              required
-            />
-          </div>
-        </div>
-      ))}
+            {passengers.map((passenger, index) => (
+              <div
+                key={index}
+                className="grid gap-x-4 gap-y-3 mb-6 md:grid-cols-2"
+              >
+                <div>
+                  <label
+                    htmlFor={`first_name_${index}`}
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Pasajero {index + 1}
+                  </label>
+                  <Input
+                    type="text"
+                    value={passenger.Firstname}
+                    onChange={(e) =>
+                      handlePassengerChange(index, "Firstname", e.target.value)
+                    }
+                    id={`first_name_${index}`}
+                    placeholder="Nombre"
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    value={passenger.Lastname}
+                    onChange={(e) =>
+                      handlePassengerChange(index, "Lastname", e.target.value)
+                    }
+                    id={`last_name_${index}`}
+                    styles="md:mt-7 sm:mt-0"
+                    placeholder="Apellido"
+                    required
+                  />
+                </div>
+              </div>
+            ))}
           </form>
 
           <div className="mb-6">

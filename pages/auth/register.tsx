@@ -33,7 +33,6 @@ const RegisterForm = () => {
     setIsSubmitting(true);
   
     const { confirmPassword, ...userData } = data; // Excluye confirmPassword al enviar los datos
-  console.log(userData);
   
     try {
       const response = await axios.post('/api/auth/register', {
@@ -60,7 +59,7 @@ const RegisterForm = () => {
   
 
   return (
-    <div className="flex h-screen bg-cover" style={{ backgroundImage: `url(/images/register.png)` }}>
+    <div className="flex h-screen bg-cover">
       <div className="absolute inset-0 flex flex-col justify-center items-center z-10">
         <div className="w-full max-w-fit p-3 bg-white shadow-md rounded-lg overflow-hidden">
           <div className="p-4">

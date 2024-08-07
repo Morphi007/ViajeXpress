@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         total,
       };
 
-      const result = await db.collection('purchases').insertOne(purchase);
+      const result = await db.collection('Purchases').insertOne(purchase);
 
       res.status(201).json({ message: 'Compra realizada con éxito', data: result });
     } catch (error) {

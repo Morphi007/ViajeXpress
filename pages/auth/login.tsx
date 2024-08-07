@@ -37,7 +37,7 @@ const LoginPage = () => {
         setErrorMessage('Credenciales incorrectas. Inténtalo de nuevo.');
         setShowError(true);
       } else {
-        console.log('Inicio de sesión exitoso:', result);
+        console.log('Inicio de sesión exitoso:');
         window.location.href = '/'; // Redirige al usuario a la página principal o a donde sea necesario
       }
     } catch (error) {
