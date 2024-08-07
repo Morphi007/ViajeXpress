@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import sendEmail from '../../utils/email'; // Asegúrate de que la ruta sea correcta
-
+import SibApiV3Sdk from 'sib-api-v3-sdk'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { to, subject, text } = req.body;
