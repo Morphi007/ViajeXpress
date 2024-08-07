@@ -75,6 +75,10 @@ const Viajes = () => {
 
   const handleSearch = (origin: string, destination: string, date: string, passengers: number) => {
     setSearchParams({ origin, destination, date, passengers });
+
+    if(!origin || !destination ){
+      return
+    }
     
     const originRoute = Rutas.find(r => r.nombre.toLowerCase().includes(origin.toLowerCase()));
     const destRoute = Rutas.find(r => r.nombre.toLowerCase().includes(destination.toLowerCase()));

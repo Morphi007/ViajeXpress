@@ -7,7 +7,7 @@ import SugerenciaList from './SugerenciaList';
 import 'tailwindcss/tailwind.css';
 
 // Define la interfaz de Ruta basada en el esquema de la base de datos
-export interface Ruta {
+interface Ruta {
   _id: string;
   nombre: string;
   parada: string;
@@ -19,6 +19,7 @@ export interface Ruta {
   };
   horarios: string[];
 }
+
 const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: string, dates: string, passengers: number) => void }) => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
