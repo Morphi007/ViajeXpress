@@ -51,7 +51,6 @@ const NavbarExpress = () => {
     };
   }, []);
 
-  console.log(session);
   
 
   return (

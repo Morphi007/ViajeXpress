@@ -4,8 +4,21 @@ import { Calendar } from '@nextui-org/react';
 import { today, getLocalTimeZone } from '@internationalized/date';
 import { I18nProvider } from '@react-aria/i18n';
 import SugerenciaList from './SugerenciaList';
-import { Rutas } from '@/database/rutas';
 import 'tailwindcss/tailwind.css';
+
+// Define la interfaz de Ruta basada en el esquema de la base de datos
+interface Ruta {
+  _id: string;
+  nombre: string;
+  parada: string;
+  mapa: string;
+  precio: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  horarios: string[];
+}
 
 const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: string, dates: string, passengers: number) => void }) => {
   const [origin, setOrigin] = useState('');
@@ -13,18 +26,37 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
   const [showCalendar, setShowCalendar] = useState(false);
   const [dates, setDates] = useState(today(getLocalTimeZone()));
   const [passengers, setPassengers] = useState(1);
-  const [originSuggestions, setOriginSuggestions] = useState<Rutas[]>([]);
-  const [destinationSuggestions, setDestinationSuggestions] = useState<Rutas[]>([]);
+  const [originSuggestions, setOriginSuggestions] = useState<Ruta[]>([]);
+  const [destinationSuggestions, setDestinationSuggestions] = useState<Ruta[]>([]);
   const [showOriginSuggestions, setShowOriginSuggestions] = useState(false);
   const [showDestinationSuggestions, setShowDestinationSuggestions] = useState(false);
+  const [originFocused, setOriginFocused] = useState(false);
+  const [destinationFocused, setDestinationFocused] = useState(false);
 
   const originRef = useRef<HTMLDivElement>(null);
   const destinationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const fetchRutas = async () => {
+      try {
+        const response = await fetch('/api/rutas');
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setOriginSuggestions(data);
+          setDestinationSuggestions(data);
+        }
+      } catch (error) {
+        console.error('Error fetching rutas:', error);
+      }
+    };
+
+    fetchRutas();
+  }, []);
+
+  useEffect(() => {
     if (origin.length > 0) {
-      setOriginSuggestions(
-        Rutas.filter(ruta => ruta.nombre.toLowerCase().includes(origin.toLowerCase()))
+      setOriginSuggestions(prevSuggestions =>
+        prevSuggestions.filter(ruta => ruta.nombre.toLowerCase().includes(origin.toLowerCase()))
       );
     } else {
       setOriginSuggestions([]);
@@ -33,8 +65,8 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
 
   useEffect(() => {
     if (destination.length > 0) {
-      setDestinationSuggestions(
-        Rutas.filter(ruta => ruta.nombre.toLowerCase().includes(destination.toLowerCase()))
+      setDestinationSuggestions(prevSuggestions =>
+        prevSuggestions.filter(ruta => ruta.nombre.toLowerCase().includes(destination.toLowerCase()))
       );
     } else {
       setDestinationSuggestions([]);
@@ -43,10 +75,10 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (originRef.current && !originRef.current.contains(event.target as Node)) {
+      if (originRef.current && !originRef.current.contains(event.target as Node) && !originFocused) {
         setShowOriginSuggestions(false);
       }
-      if (destinationRef.current && !destinationRef.current.contains(event.target as Node)) {
+      if (destinationRef.current && !destinationRef.current.contains(event.target as Node) && !destinationFocused) {
         setShowDestinationSuggestions(false);
       }
     };
@@ -55,7 +87,7 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [originFocused, destinationFocused]);
 
   const handleSwap = () => {
     setOrigin(destination);
@@ -68,19 +100,22 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
   };
 
   const handleSearch = () => {
+    console.log('Buscando:', origin, destination, dates.toString(), passengers);
+    
     if (!origin || !destination) return;
     onSearch(origin, destination, dates.toString(), passengers);
   };
 
-  const handleOriginSelect = (suggestion: Rutas) => {
+  const handleOriginSelect = (suggestion: Ruta) => {
     setOrigin(suggestion.nombre);
     setShowOriginSuggestions(false);
   };
 
-  const handleDestinationSelect = (suggestion: Rutas) => {
+  const handleDestinationSelect = (suggestion: Ruta) => {
     setDestination(suggestion.nombre);
     setShowDestinationSuggestions(false);
   };
+
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 p-4">
@@ -88,8 +123,8 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
         <div
           className="relative w-full md:w-auto"
           ref={originRef}
-          onMouseEnter={() => setShowOriginSuggestions(true)}
-          onMouseLeave={() => !origin && setShowOriginSuggestions(false)}
+          onMouseEnter={() => setShowOriginSuggestions(originFocused)}
+          onMouseLeave={() => !originFocused && setShowOriginSuggestions(false)}
         >
           <input
             type="text"
@@ -99,7 +134,19 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
               setOrigin(e.target.value);
               setShowOriginSuggestions(true);
             }}
-            onFocus={() => setShowOriginSuggestions(true)}
+            onFocus={() => {
+              setOriginFocused(true);
+              setShowOriginSuggestions(true);
+            }}
+            onBlur={() => {
+              setOriginFocused(false);
+              setTimeout(() => {
+                // Ocultar las sugerencias después de un pequeño retraso para permitir la selección
+                if (!originSuggestions.find(suggestion => suggestion.nombre === origin)) {
+                  setShowOriginSuggestions(false);
+                }
+              }, 100);
+            }}
             className="border rounded pl-10 pr-4 py-2 w-full md:w-auto"
           />
           <FaMapMarkerAlt className="absolute top-1/2 left-3 transform -translate-y-1/2 text-blue-500" />
@@ -120,8 +167,8 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
         <div
           className="relative w-full md:w-auto"
           ref={destinationRef}
-          onMouseEnter={() => setShowDestinationSuggestions(true)}
-          onMouseLeave={() => !destination && setShowDestinationSuggestions(false)}
+          onMouseEnter={() => setShowDestinationSuggestions(destinationFocused)}
+          onMouseLeave={() => !destinationFocused && setShowDestinationSuggestions(false)}
         >
           <input
             type="text"
@@ -131,7 +178,19 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
               setDestination(e.target.value);
               setShowDestinationSuggestions(true);
             }}
-            onFocus={() => setShowDestinationSuggestions(true)}
+            onFocus={() => {
+              setDestinationFocused(true);
+              setShowDestinationSuggestions(true);
+            }}
+            onBlur={() => {
+              setDestinationFocused(false);
+              setTimeout(() => {
+                // Ocultar las sugerencias después de un pequeño retraso para permitir la selección
+                if (!destinationSuggestions.find(suggestion => suggestion.nombre === destination)) {
+                  setShowDestinationSuggestions(false);
+                }
+              }, 100);
+            }}
             className="border rounded pl-10 pr-4 py-2 w-full md:w-auto"
           />
           <FaMapMarkerAlt className="absolute top-1/2 left-3 transform -translate-y-1/2 text-blue-500" />
@@ -178,7 +237,7 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
         <button
           onClick={handleSearch}
           className="bg-blue-500 text-white px-4 py-2 rounded"
-          aria-label="Buscar rutas"
+          aria-label="Buscar"
         >
           Buscar
         </button>

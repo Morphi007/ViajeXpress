@@ -10,10 +10,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      
       colors: {
         'c': '#1e3a8a', // Color personalizado
       },
       backgroundImage: {
+        'custom-gradient': 'radial-gradient(circle farthest-corner at 10% 20%, rgba(176,229,208,1) 42%, rgba(92,202,238,0.41) 93.6%)',
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
