@@ -6,6 +6,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   address: string;
+  role: string;
 }
 
 const userSchema: Schema<IUser> = new Schema({
@@ -29,6 +30,10 @@ const userSchema: Schema<IUser> = new Schema({
   address: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    default: 'client', // Valor predeterminado
   },
 });
 
