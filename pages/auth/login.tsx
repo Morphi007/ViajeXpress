@@ -52,10 +52,15 @@ const LoginPage = () => {
       <section className="flex flex-col md:flex-row h-screen items-center">
         {/* Botón para volver a la página principal */}
         <div className="absolute top-4 left-4">
-          <Link href="/" className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-700 transition duration-300" legacyBehavior>
-              Volver a inicio
-          </Link>
-        </div>
+  <Link href="/" legacyBehavior>
+    <a className="px-6 py-3 bg-white text-blue-600 border border-blue-600 rounded-full hover:bg-gray-100 transition duration-300 text-center block">
+      Volver a inicio
+    </a>
+  </Link>
+</div>
+
+
+
 
         <div className="h-screen flex justify-center items-center md:w-1/2 xl:w-2/3">
           <div className="flex justify-center items-center absolute"></div>
