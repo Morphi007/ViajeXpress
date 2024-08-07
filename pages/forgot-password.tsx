@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import AuthLayout from '@/components/layout/AuthLayout';
 import Image from 'next/image';
+
 type FormData = {
   Email: string;
 };
@@ -14,13 +15,20 @@ const ForgotPasswordPage = () => {
   const onSubmit = async ({ Email }: FormData) => {
     setMessage('');
     try {
-      // Aquí debes implementar la lógica para enviar el correo de restablecimiento de contraseña
-      // Puede ser una llamada a tu API o servicio de autenticación
+      const response = await fetch('/api/forgotPassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: Email }),
+      });
 
-      // Ejemplo ficticio:
-      // await sendResetPasswordEmail(Email);
-
-      setMessage('Se ha enviado un correo para restablecer tu contraseña.');
+      const data = await response.json();
+      if (response.ok) {
+        setMessage('Se ha enviado un correo para restablecer tu contraseña.');
+      } else {
+        setMessage(data.error || 'Ocurrió un error al intentar enviar el correo. Por favor, inténtalo de nuevo.');
+      }
     } catch (error) {
       console.error('Error al enviar correo:', error);
       setMessage('Ocurrió un error al intentar enviar el correo. Por favor, inténtalo de nuevo.');
@@ -30,7 +38,6 @@ const ForgotPasswordPage = () => {
   return (
     <AuthLayout title={'Forgot Password'}>
       <section className="flex flex-col md:flex-row h-screen items-center">
-        
 
         <div className="h-screen flex justify-center items-center md:w-1/2 xl:w-2/3">
           <Image
