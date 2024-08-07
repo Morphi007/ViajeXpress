@@ -30,11 +30,7 @@ const ForgotPasswordPage = () => {
   return (
     <AuthLayout title={'Forgot Password'}>
       <section className="flex flex-col md:flex-row h-screen items-center">
-        <div className="absolute top-4 left-4">
-          <Link href="/" className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-700 transition duration-300" legacyBehavior>
-              Volver a inicio
-          </Link>
-        </div>
+        
 
         <div className="h-screen flex justify-center items-center md:w-1/2 xl:w-2/3">
           <Image
