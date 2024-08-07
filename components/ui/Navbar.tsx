@@ -1,14 +1,17 @@
+// components/NavbarExpress.tsx
 import React, { useState, useEffect } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import { IoCarOutline, IoTicketOutline } from 'react-icons/io5';
 import NextLink from 'next/link';
 import { useTicket } from "@/context/auth/TicketContext";
+import { useSession, signOut } from 'next-auth/react';
 
 const NavbarExpress = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownHovered, setIsDropdownHovered] = useState(false);
   const { ticketCount } = useTicket();
+  const { data: session, status } = useSession();
 
   const menuItems = [
     { name: "Inicio", href: "/" },
@@ -47,6 +50,9 @@ const NavbarExpress = () => {
       document.removeEventListener('mousedown', handleClickOutside as EventListener);
     };
   }, []);
+
+  console.log(session);
+  
 
   return (
     <Navbar
@@ -120,16 +126,31 @@ const NavbarExpress = () => {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden sm:flex">
-          <Button
-            as={NextLink}
-            href="/auth/login"
-            variant="flat"
-            className="text-white border border-white hover:bg-purple-500 hover:text-white"
-          >
-            Iniciar sesión
-          </Button>
-        </NavbarItem>
+        {status === 'authenticated' ? (
+          <NavbarItem className="hidden sm:flex">
+            <div className="text-white font-semibold px-4 py-2">
+              Hola, {session.user?.name}
+            </div>
+            <Button
+              variant="flat"
+              className="text-white border border-white hover:bg-purple-500 hover:text-white"
+              onClick={() => signOut({ callbackUrl: '/' })}
+            >
+              Cerrar sesión
+            </Button>
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="hidden sm:flex">
+            <Button
+              as={NextLink}
+              href="/auth/login"
+              variant="flat"
+              className="text-white border border-white hover:bg-purple-500 hover:text-white"
+            >
+              Iniciar sesión
+            </Button>
+          </NavbarItem>
+        )}
         <NextLink href="/tickets" legacyBehavior>
           <a className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 focus:bg-gray-100 active:bg-gray-200">
             <IoTicketOutline size={25} className="text-black"/>

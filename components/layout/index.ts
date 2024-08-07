@@ -1,3 +1,3 @@
-export {  ExpressLayout} from './PrincipalLyaout';
+export {  ExpressLayout} from './PrincipalLayout';
 export * from './AuthLayout';
 

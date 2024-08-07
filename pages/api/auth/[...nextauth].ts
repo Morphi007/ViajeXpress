@@ -1,86 +1,86 @@
-import { db, dbUsers } from '@/database';
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import clientPromise from '@/lib/mongodb';
+import { compare } from 'bcryptjs';
 
-declare module 'next-auth' {
-	interface Session {
-		accessToken?: string;
-	}
-}
+export const authOptions = {
+  providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+		try {
+		  const client = await clientPromise;
+		  const db = client.db('ViajeXpress');
 
-export const authOptions: NextAuthOptions = {
-	// Configure one or more authentication providers
-
-	providers: [
-		// ...add more providers here
-
-		Credentials({
-			name: 'Custom Login',
-			credentials: {
-				Email: { label: 'Correo:', type: 'email', placeholder: 'correo@google.com' },
-				Password: { label: 'Contraseña:', type: 'password', placeholder: 'Contraseña' },
-			},
-
-			async authorize(credentials) {
-				db.connect().catch((error) => {
-					error: 'Connection Failed...!';
-				});
-				const user = await dbUsers.checkUserEmailPassword(
-					credentials!.Email,
-					credentials!.Password,
-				);
-				if (user) {
-					return { ...user, id: user._id };
-				}
-
-				return null;
-			},
-		}),
-	],
-
-	//custom page
-
-	pages: {
-		signIn: '/auth/login',
-		newUser: '/auth/register',
-	},
-
-	session: {
-		maxAge: 259200, //30d
-		strategy: 'jwt',
-		updateAge: 86400, //cada dia
-	},
-
-	//callback
-	//callback para guardar la data de la seccion entre otras cosas
-
-	callbacks: {
-		async jwt({ token, account, user }) {
-			
-			// console.log({token,account,user})
-
-			if (account) {
-				token.accessToken = account.access_token;
-
-				switch (account.type) {
-					case 'credentials':
-						token.user = user;
-						break;
-				}
+		  const email = credentials?.email?.toLowerCase();
+	  
+		  // Busca el usuario en la base de datos
+		  const user = await db.collection('Users').findOne({ Email: email });
+		  console.log(user);
+		  
+	  
+		  // Verifica la contraseña
+		  if (user && credentials?.password) {
+			console.log('Verificando contraseña');
+			const isPasswordValid = await compare(credentials.password, user.Password);
+			if (isPasswordValid) {
+			  return {
+				id: user._id.toString(),
+				email: user.Email,
+				role: user.role,
+				Firstname: user.Firstname,
+				Lastname: user.Lastname,
+			  };
 			}
+		  }
+		  
+		  return null;
+		} catch (error) {
+		  console.error('Error en la autorización:', error);
+		  return null;
+		}
+	  }
+    }),
+  ],
 
-			return token;
-		},
+  pages: {
+    signIn: '/auth/login',
+    newUser: '/auth/register',
+  },
 
-		async session({ session, token, user }) {
-			({ session, token, user });
+  session: {
+    strategy: 'jwt' as const,
+    maxAge: 30 * 24 * 60 * 60, // 30 días en segundos
+  },
 
-			session.accessToken = token.accessToken as any;
-			session.user = token.user as any;
-
-			return session;
-		},
-	}, // end callback
+  callbacks: {
+	async jwt({ token, user }: { token: any, user: any }) {
+	  if (user) {
+		token.id = user.id;
+		token.email = user.email;
+		token.role = user.role;
+		token.Firstname = user.Firstname;
+		token.Lastname = user.Lastname;
+	  }
+	  return token;
+	},
+  
+	async session({ session, token }: { session: any, token: any }) {
+		let name = token.Firstname + ' ' + token.Lastname;
+	  session.user = {
+		id: token.id as string,
+		email: token.email as string,
+		role: token.role as string,
+		name: name as string, // Renombra `Firstname` a `name`
+	  };
+	  return session;
+	},
+  }
+  
 };
 
 export default NextAuth(authOptions);

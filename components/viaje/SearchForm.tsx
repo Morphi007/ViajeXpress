@@ -68,6 +68,7 @@ const SearchForm = ({ onSearch }: { onSearch: (origin: string, destination: stri
   };
 
   const handleSearch = () => {
+    if (!origin || !destination) return;
     onSearch(origin, destination, dates.toString(), passengers);
   };
 
