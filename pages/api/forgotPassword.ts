@@ -7,18 +7,15 @@ import { v4 as uuidv4 } from 'uuid';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { email } = req.body;
-    console.log(email);
-    
+
+    let fixedEmail = email.toLowerCase();
+
 
     try {
       const client = await clientPromise;
       const db = client.db('ViajeXpress');
-    console.log(2);
 
-
-    const user = await db.collection('Users').findOne({ Email: 'adrian@gmail.com' });
-    console.log(user);
-
+    const user = await db.collection('Users').findOne({ Email: fixedEmail });
 
       if (!user) {
         res.status(400).json({ message: 'El correo electrónico no está registrado' });
